@@ -9,7 +9,7 @@ export const Header = () => {
       <Logo />
       <ul>
         {headerMenuMass.map((item) => (
-          <li>
+          <li key={item}>
             <a href="">{item}</a>
           </li>
         ))}

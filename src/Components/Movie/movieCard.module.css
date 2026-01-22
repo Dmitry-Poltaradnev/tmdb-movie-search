@@ -1,0 +1,14 @@
+.movieCard {
+    flex: 0 0 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.movieImg {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
