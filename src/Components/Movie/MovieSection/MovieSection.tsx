@@ -1,4 +1,4 @@
-import { MovieCard } from './MovieCard.tsx'
+import { MovieCard } from '../MovieCard/MovieCard.tsx'
 import s from './movieSection.module.css'
 
 type MovieSectionPropsType = {
@@ -7,7 +7,7 @@ type MovieSectionPropsType = {
   category: 'popular' | 'upcoming' | 'nowPlaying' | 'topRated'
 }
 
-export const MovieSection = ({ title, category, movies }: MovieSectionPropsType) => {
+export const MovieSection = ({ title, movies }: MovieSectionPropsType) => {
   return (
     <section className={s.movieSection}>
       <h3>Category : {title}</h3>

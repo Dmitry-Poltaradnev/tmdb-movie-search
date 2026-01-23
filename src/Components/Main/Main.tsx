@@ -1,4 +1,4 @@
-import { MovieSection } from '../Movie/MovieSection.tsx'
+import { MovieSection } from '../Movie/MovieSection/MovieSection.tsx'
 import {
   useGetNowPlayingMoviesQuery,
   useGetPopularMoviesQuery,
@@ -13,10 +13,17 @@ export const Main = () => {
   const { data: NowPlayingMovies } = useGetNowPlayingMoviesQuery()
   const { data: TopRatedMovies } = useGetTopRatedMoviesQuery()
 
+  const getRandomPoster = () => {
+    if (!popularMovies?.results?.length) return 0
+    return Math.floor(Math.random() * popularMovies.results.length)
+  }
+
+  const randomPoster = getRandomPoster()
+
   return (
     <>
       <WelcomeSection
-        picture={`https://image.tmdb.org/t/p/w500${popularMovies?.results[0]?.poster_path}`}
+        picture={`https://image.tmdb.org/t/p/w500${popularMovies?.results[randomPoster]?.backdrop_path}`}
       />
       <MovieSection title={'Popular Movie'} category={'popular'} movies={popularMovies} />
       <MovieSection title={'Top Rated Movie'} category={'topRated'} movies={TopRatedMovies} />
