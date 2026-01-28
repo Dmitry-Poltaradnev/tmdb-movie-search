@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 
 const menu = [
   { title: 'Main', path: '/' },
-  { title: 'Category Movies', path: '/movie/popular' },
-  // { title: 'Favorites', path: 'account/:id/favorite/movies' },
+  { title: 'Category Movies', path: '/movie/category/popular' },
+  // { title: 'Favorites', path: `/account/${id}/favorite/movies` },
   // { title: 'Filtered Movies', path: '' },
-  { title: 'Search', path: 'search/movie' },
+  { title: 'Search', path: '/search/movie' },
 ]
 
 export const Header = () => {

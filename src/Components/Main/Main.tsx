@@ -19,16 +19,35 @@ export const Main = () => {
   }
 
   const randomPoster = getRandomPoster()
-
   return (
     <>
       <WelcomeSection
         picture={`https://image.tmdb.org/t/p/w500${popularMovies?.results[randomPoster]?.backdrop_path}`}
       />
-      <MovieSection title={'Popular Movie'} category={'popular'} movies={popularMovies} />
-      <MovieSection title={'Top Rated Movie'} category={'topRated'} movies={TopRatedMovies} />
-      <MovieSection title={'Upcoming Movie'} category={'upcoming'} movies={upcomingMovies} />
-      <MovieSection title={'Now Playing Movie'} category={'nowPlaying'} movies={NowPlayingMovies} />
+      <MovieSection
+        title={'Popular Movie'}
+        category={'popular'}
+        movies={popularMovies}
+        fullSection={false}
+      />
+      <MovieSection
+        title={'Top Rated Movie'}
+        category={'top_rated'}
+        movies={TopRatedMovies}
+        fullSection={false}
+      />
+      <MovieSection
+        title={'Upcoming Movie'}
+        category={'upcoming'}
+        movies={upcomingMovies}
+        fullSection={false}
+      />
+      <MovieSection
+        title={'Now Playing Movie'}
+        category={'now_playing'}
+        movies={NowPlayingMovies}
+        fullSection={false}
+      />
     </>
   )
 }

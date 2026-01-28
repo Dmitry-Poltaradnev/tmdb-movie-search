@@ -1,25 +1,30 @@
 import { MovieCard } from '../MovieCard/MovieCard.tsx'
 import s from './movieSection.module.css'
+import { Link } from 'react-router-dom'
 
-type MovieSectionPropsType = {
+export type MovieSectionPropsType = {
   movies: any
   title: string
-  category: 'popular' | 'upcoming' | 'nowPlaying' | 'topRated'
+  category: string
+  fullSection: boolean
 }
 
-export const MovieSection = ({ title, movies }: MovieSectionPropsType) => {
+export const MovieSection = ({ title, movies, category, fullSection }: MovieSectionPropsType) => {
   return (
     <section className={s.movieSection}>
       <h3>Category : {title}</h3>
       <div className={s.movieCardsWrapper}>
-        {movies?.results.map((item: any, index: number) => {
-          if (index < 6) {
+        {movies?.results?.map((item: any, index: number) => {
+          if (!fullSection) {
+            if (index < 6) {
+              return <MovieCard key={item.id} movie={item} />
+            }
+          } else {
             return <MovieCard key={item.id} movie={item} />
           }
-          return null
         })}
+        {!fullSection ? <Link to={`/movie/category/${category}`}>View More</Link> : null}
       </div>
-      <button>View More</button>
     </section>
   )
 }

@@ -1,7 +1,35 @@
 import { useParams } from 'react-router-dom'
 import s from './moviePage.module.css'
+import { useGetMovieDetailsQuery } from '../../../api/tmdbApi.ts'
 
 export const MoviePage = () => {
   const { id } = useParams()
-  return <div className={s.MoviePage}>Movie :{id}</div>
+
+  const { data } = useGetMovieDetailsQuery(id)
+  console.log(data)
+  const { adult, backdrop_path, budget, genres, overview, status, title, vote_average } = data || {}
+
+  if (!data) return <div>Loading...</div>
+
+  const finalBudget = (budget: number) => {
+    return budget.toString().length > 6 ? budget.toString().slice(0, -6) : budget
+  }
+
+  return (
+    <div className={s.moviePage}>
+      <p> MovieID :{id}</p>
+      <h4>Title: {title}</h4>
+      <ul className={s.genresList}>
+        Genres :
+        {genres?.map((item: any) => (
+          <li key={item.id}> {item.name}</li>
+        ))}
+      </ul>
+      <img src={`https://image.tmdb.org/t/p/w500${backdrop_path}`} alt="moviePoster" />
+      <p>Description: {overview}</p>
+      <p>For adults: {adult ? 'true' : 'false'}</p>
+      <p>Rating: {vote_average}</p>
+      <p>Budget: {finalBudget(budget)}M USD</p>
+    </div>
+  )
 }

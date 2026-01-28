@@ -12,7 +12,13 @@ export const api = createApi({
     },
   }),
 
-  tagTypes: ['PopularMovies', 'UpcomingMovies', 'NowPlayingMovies', 'TopRatedMovies'],
+  tagTypes: [
+    'PopularMovies',
+    'UpcomingMovies',
+    'NowPlayingMovies',
+    'TopRatedMovies',
+    'MovieDetails',
+  ],
 
   endpoints: (builder) => ({
     getPopularMovies: builder.query<any, void>({
@@ -31,6 +37,10 @@ export const api = createApi({
       query: () => 'movie/top_rated',
       providesTags: ['TopRatedMovies'],
     }),
+    getMovieDetails: builder.query<string, void>({
+      query: (movie_id) => `movie/${movie_id}`,
+      providesTags: ['MovieDetails'],
+    }),
   }),
 })
 
@@ -39,4 +49,5 @@ export const {
   useGetUpcomingMoviesQuery,
   useGetNowPlayingMoviesQuery,
   useGetTopRatedMoviesQuery,
+  useGetMovieDetailsQuery,
 } = api

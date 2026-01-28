@@ -11,14 +11,16 @@ export const MovieCard = ({ movie }: MovieCardPropsType) => {
     navigate(`/movie/${movie.id}`)
   }
   return (
-    <div onClick={handleClick} className={s.movieCard}>
-      <img
-        className={s.movieImg}
-        src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
-        alt="movieImg"
-      />
-      <p>Title : {movie.title}</p>
-      <p>Rate : {movie.vote_average}</p>
+    <div className={s.movieCard}>
+      <div onClick={handleClick}>
+        <img
+          className={s.movieImg}
+          src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+          alt="movieImg"
+        />
+        <p>Title : {movie.title}</p>
+        <p>Rate : {movie.vote_average}</p>
+      </div>
       <button>Add to my favorites</button>
     </div>
   )
