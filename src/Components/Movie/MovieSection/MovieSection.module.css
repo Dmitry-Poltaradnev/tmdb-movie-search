@@ -1,10 +1,10 @@
 .movieSection {
-    max-width: 1280px;
+  max-width: 1280px;
 }
 
 .movieCardsWrapper {
-    display: flex;
-    align-items: start;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 20px;
 }

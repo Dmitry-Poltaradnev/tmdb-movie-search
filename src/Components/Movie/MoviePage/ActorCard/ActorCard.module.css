@@ -1,0 +1,13 @@
+.actorCard {
+    list-style: none;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.actorPhoto {
+    border-radius: 50%;
+    height: 160px;
+    width: 160px;
+    object-fit: cover;
+}

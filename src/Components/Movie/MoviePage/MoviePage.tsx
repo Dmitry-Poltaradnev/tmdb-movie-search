@@ -1,34 +1,60 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import s from './MoviePage.module.css'
-import { useGetMovieDetailsQuery } from '../../../api/tmdbApi.ts'
+import {
+  useGetMovieActorsQuery,
+  useGetMovieDetailsQuery,
+  useGetSimilarMoviesQuery,
+} from '../../../api/tmdbApi.ts'
+import { ActorCard } from './ActorCard/ActorCard.tsx'
+import { MovieCard } from '../MovieCard/MovieCard.tsx'
 
 export const MoviePage = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
 
-  const { data } = useGetMovieDetailsQuery(id)
-  const { backdrop_path, budget, genres, overview, runtime, title, vote_average } = data || {}
+  const { data: movie } = useGetMovieDetailsQuery(id)
+  const { data: people } = useGetMovieActorsQuery(id)
+  const { data: similarMovies } = useGetSimilarMoviesQuery(id)
 
-  if (!data) return <div>Loading...</div>
+  const { backdrop_path, genres, overview, runtime, title, vote_average, release_date } =
+    movie || {}
 
-  const finalBudget = (budget: number) => {
-    return budget.toString().length > 6 ? budget.toString().slice(0, -6) : budget
-  }
+  if (!movie) return <div>Loading...</div>
 
   return (
     <div className={s.moviePage}>
-      <p> MovieID :{id}</p>
+      <img src={`https://image.tmdb.org/t/p/w500${backdrop_path}`} alt="moviePoster" />
       <h4>Title: {title}</h4>
+      <p>Release data: {release_date}</p>
+      <p>Rating: {vote_average}</p>
       <ul className={s.genresList}>
-        Genres :
+        Genres:
         {genres?.map((item: any) => (
           <li key={item.id}> {item.name} </li>
         ))}
       </ul>
-      <img src={`https://image.tmdb.org/t/p/w500${backdrop_path}`} alt="moviePoster" />
+      <ul className={s.actorsList}>
+        {people?.cast.map((actor: any, i: number) =>
+          i < 6 ? <ActorCard key={actor.id} actor={actor} /> : null
+        )}
+      </ul>
+      <p>Movie duration: {runtime} m</p>
       <p>Description: {overview}</p>
-      <p>Movie duration : {runtime} m</p>
-      <p>Rating: {vote_average}</p>
-      {Number(finalBudget(budget)) !== 0 ? <p>Budget: {finalBudget(budget)}M USD</p> : null}
+      <div>
+        <p>Similar movies:</p>
+        <div>
+          {!similarMovies ? (
+            <p>We don't have similar movies</p>
+          ) : (
+            <ul className={s.similarMoviesWrap}>
+              {similarMovies.results.map((movie: any, i: number) =>
+                i < 6 ? <MovieCard key={movie.id} movie={movie} /> : null
+              )}
+            </ul>
+          )}
+        </div>
+      </div>
+      <button onClick={() => navigate(-1)}>Back</button>
     </div>
   )
 }
