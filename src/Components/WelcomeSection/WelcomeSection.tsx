@@ -1,5 +1,5 @@
 import { SearchMovieBlock } from '../SearchMovieBlock/SearchMovieBlock.tsx'
-import s from './welcomeSection.module.css'
+import s from './WelcomeSection.module.css'
 
 type WelcomeSectionProps = {
   picture?: string

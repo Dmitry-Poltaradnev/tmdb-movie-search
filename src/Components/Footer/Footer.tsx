@@ -1,8 +1,5 @@
-export const Footer = () => {
-    return (
-        <div>
-            Footer
-        </div>
-    );
-};
+import s from './Footer.module.css'
 
+export const Footer = () => {
+  return <footer className={s.footer}>Footer</footer>
+}

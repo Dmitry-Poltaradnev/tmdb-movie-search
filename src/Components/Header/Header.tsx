@@ -1,16 +1,16 @@
 import { Logo } from '../../assets/Logo.tsx'
-import s from './header.module.css'
+import s from './Header.module.css'
 import { Link } from 'react-router-dom'
 
-const menu = [
-  { title: 'Main', path: '/' },
-  { title: 'Category Movies', path: '/movie/category/popular' },
-  // { title: 'Favorites', path: `/account/${id}/favorite/movies` },
-  // { title: 'Filtered Movies', path: '' },
-  { title: 'Search', path: '/search/movie' },
-]
-
 export const Header = () => {
+  const menu = [
+    { title: 'Main', path: '/' },
+    { title: 'Category movies', path: '/movie/category/popular' },
+    { title: 'Filtered movies', path: '/filtered/movies' },
+    { title: 'Search', path: '/search/movie' },
+    { title: 'Favorites', path: '/favorite/movies' },
+  ]
+
   return (
     <div className={s.header}>
       <Logo />

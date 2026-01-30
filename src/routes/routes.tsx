@@ -1,8 +1,11 @@
+import App from '../App.tsx'
 import { Main } from '../Components/Main/Main.tsx'
 import { MoviePage } from '../Components/Movie/MoviePage/MoviePage.tsx'
 import { Route, Routes } from 'react-router-dom'
-import { MovieCategoryPage } from '../Components/MovieCategoryPage/MovieCategoryPage.tsx'
-import App from '../App.tsx'
+import { MovieCategoryPage } from '../Components/pages/MovieCategoryPage/MovieCategoryPage.tsx'
+import { FavoriteMoviesPage } from '../Components/pages/FavoriteMoviesPage/FavoriteMoviesPage.tsx'
+import { SearchMoviePage } from '../Components/pages/SearchMoviePage/SearchMoviePage.tsx'
+import { FilterMoviesPage } from '../Components/pages/FilterMoviesPage/FilterMoviesPage.tsx'
 
 export const AppRoutes = () => {
   return (
@@ -11,9 +14,9 @@ export const AppRoutes = () => {
         <Route index element={<Main />} />
         <Route path="movie/:id" element={<MoviePage />} />
         <Route path="movie/category/:category" element={<MovieCategoryPage />} />
-
-        {/*<Route path="account/:id/favorite/movies" element={<FavoriteMoviesPage />} />*/}
-        {/*<Route path="search/movie" element={<SearchMoviePage />} />*/}
+        <Route path="favorite/movies" element={<FavoriteMoviesPage />} />
+        <Route path="search/movie" element={<SearchMoviePage />} />
+        <Route path="filtered/movies" element={<FilterMoviesPage />} />
       </Route>
     </Routes>
   )

@@ -18,9 +18,13 @@ export const api = createApi({
     'NowPlayingMovies',
     'TopRatedMovies',
     'MovieDetails',
+    'FavoriteMovies',
   ],
 
   endpoints: (builder) => ({
+    getAccountDetails: builder.query<any, string>({
+      query: (sessionId) => `/account?session_id=${sessionId}`,
+    }),
     getPopularMovies: builder.query<any, void>({
       query: () => 'movie/popular',
       providesTags: ['PopularMovies'],
@@ -37,17 +41,23 @@ export const api = createApi({
       query: () => 'movie/top_rated',
       providesTags: ['TopRatedMovies'],
     }),
-    getMovieDetails: builder.query<string, void>({
+    getMovieDetails: builder.query<any, number>({
       query: (movie_id) => `movie/${movie_id}`,
       providesTags: ['MovieDetails'],
+    }),
+    getFavoriteMovies: builder.query<string, void>({
+      query: (account_id) => `/account/${account_id}/favorite/movies`,
+      providesTags: ['FavoriteMovies'],
     }),
   }),
 })
 
 export const {
+  useGetAccountDetailsQuery,
   useGetPopularMoviesQuery,
   useGetUpcomingMoviesQuery,
   useGetNowPlayingMoviesQuery,
   useGetTopRatedMoviesQuery,
   useGetMovieDetailsQuery,
+  useGetFavoriteMoviesQuery,
 } = api

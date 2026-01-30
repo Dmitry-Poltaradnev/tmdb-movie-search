@@ -1,4 +1,4 @@
-import s from './movieCard.module.css'
+import s from './MovieCard.module.css'
 import { useNavigate } from 'react-router-dom'
 
 type MovieCardPropsType = {

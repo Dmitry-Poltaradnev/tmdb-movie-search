@@ -1,4 +1,4 @@
-import s from './searchMovieBlock.module.css'
+import s from './SearchMovieBlock.module.css'
 
 export const SearchMovieBlock = () => {
   return (

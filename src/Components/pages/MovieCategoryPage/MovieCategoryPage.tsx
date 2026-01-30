@@ -1,11 +1,11 @@
-import s from './movieCategoryPage.module.css'
+import s from './MovieCategoryPage.module.css'
 import {
   useGetNowPlayingMoviesQuery,
   useGetPopularMoviesQuery,
   useGetTopRatedMoviesQuery,
   useGetUpcomingMoviesQuery,
-} from '../../api/tmdbApi.ts'
-import { MovieSection } from '../Movie/MovieSection/MovieSection.tsx'
+} from '../../../api/tmdbApi.ts'
+import { MovieSection } from '../../Movie/MovieSection/MovieSection.tsx'
 import { Link, useParams } from 'react-router-dom'
 
 export const MovieCategoryPage = () => {
@@ -16,13 +16,18 @@ export const MovieCategoryPage = () => {
   const { data: NowPlayingMovies } = useGetNowPlayingMoviesQuery()
   const { data: TopRatedMovies } = useGetTopRatedMoviesQuery()
 
-  const categoryMassBtn = ['popular', 'upcoming', 'now_playing', 'top_rated']
+  const categoryMassBtn = [
+    { title: 'Popular', category: 'popular' },
+    { title: 'Upcoming', category: 'upcoming' },
+    { title: 'Now Playing', category: 'now_playing' },
+    { title: 'Top Rated', category: 'top_rated' },
+  ]
 
   const Btns = (
     <ul>
       {categoryMassBtn.map((btn) => (
-        <li>
-          <Link to={`/movie/category/${btn}`}>{btn}</Link>
+        <li key={btn.category}>
+          <Link to={`/movie/category/${btn.category}`}>{btn.title}</Link>
         </li>
       ))}
     </ul>

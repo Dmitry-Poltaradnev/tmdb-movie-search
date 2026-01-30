@@ -1,11 +1,11 @@
 import { MovieCard } from '../MovieCard/MovieCard.tsx'
-import s from './movieSection.module.css'
+import s from './MovieSection.module.css'
 import { Link } from 'react-router-dom'
 
 export type MovieSectionPropsType = {
   movies: any
   title: string
-  category: string
+  category: any
   fullSection: boolean
 }
 
