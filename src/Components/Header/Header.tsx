@@ -1,8 +1,14 @@
 import { Logo } from '../../assets/Logo.tsx'
 import s from './Header.module.css'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleTheme } from '../../features/theme/themeSlices.ts'
+import type { RootState } from '@reduxjs/toolkit/query'
 
 export const Header = () => {
+  const dispatch = useDispatch()
+  const theme = useSelector((state: RootState) => state.theme.theme)
+
   const menu = [
     { title: 'Main', path: '/' },
     { title: 'Category movies', path: '/movie/category/popular' },
@@ -21,7 +27,7 @@ export const Header = () => {
           </li>
         ))}
       </ul>
-      <button>Change Theme</button>
+      <button onClick={() => dispatch(toggleTheme())}>Change Theme : {theme}</button>
     </div>
   )
 }

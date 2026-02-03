@@ -4,3 +4,21 @@
   padding: 2rem;
   text-align: center;
 }
+
+:root[data-theme='light'] {
+  --bg: #ffff;
+  --text: #0f172a;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0f172a;
+  --text: #f8fafc;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}

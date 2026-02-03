@@ -6,17 +6,19 @@ import { MovieCategoryPage } from '../Components/pages/MovieCategoryPage/MovieCa
 import { FavoriteMoviesPage } from '../Components/pages/FavoriteMoviesPage/FavoriteMoviesPage.tsx'
 import { SearchMoviePage } from '../Components/pages/SearchMoviePage/SearchMoviePage.tsx'
 import { FilterMoviesPage } from '../Components/pages/FilterMoviesPage/FilterMoviesPage.tsx'
+import { NotFoundPage } from '../Components/pages/NotFoundPage/NotFoundPage.tsx'
 
 export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Main />} />
-        <Route path="movie/:id" element={<MoviePage />} />
-        <Route path="movie/category/:category" element={<MovieCategoryPage />} />
-        <Route path="favorite/movies" element={<FavoriteMoviesPage />} />
-        <Route path="search/movie" element={<SearchMoviePage />} />
-        <Route path="filtered/movies" element={<FilterMoviesPage />} />
+        <Route path="/movie/:id" element={<MoviePage />} />
+        <Route path="/movie/category/:category" element={<MovieCategoryPage />} />
+        <Route path="/favorite/movies" element={<FavoriteMoviesPage />} />
+        <Route path="/search/movie" element={<SearchMoviePage />} />
+        <Route path="/filtered/movies" element={<FilterMoviesPage />} />
+        <Route path="/*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   )

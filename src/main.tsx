@@ -6,10 +6,16 @@ import { store } from './redux/store.ts'
 import { BrowserRouter } from 'react-router-dom'
 import { AppRoutes } from './routes/routes.tsx'
 
+const params = new URLSearchParams(window.location.search)
+const redirect = params.get('redirect')
+
+if (redirect) {
+  window.history.replaceState(null, '', redirect)
+}
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="/tmdb-movie-search">
+      <BrowserRouter basename="/tmdb-movie-search/">
         <AppRoutes />
       </BrowserRouter>
     </Provider>
