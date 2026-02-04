@@ -1,12 +1,25 @@
 import s from './MovieCard.module.css'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import {
+  addMovie,
+  type MovieType,
+  removeMovie,
+} from '../../../features/favorites/favoritesSlices.ts'
+import { store } from '../../../redux/store.ts'
 
 type MovieCardPropsType = {
-  movie: any
+  movie: MovieType
+  isFavorite: boolean
 }
 
-export const MovieCard = ({ movie }: MovieCardPropsType) => {
+console.log(store.getState())
+
+export const MovieCard = ({ movie, isFavorite }: MovieCardPropsType) => {
+  const dispatch = useDispatch()
+
   const navigate = useNavigate()
+
   const handleClick = () => {
     navigate(`/movie/${movie.id}`)
   }
@@ -21,7 +34,11 @@ export const MovieCard = ({ movie }: MovieCardPropsType) => {
         <p>Title : {movie.title}</p>
         <p>Rate : {movie.vote_average}</p>
       </div>
-      <button>Add to my favorites</button>
+      {isFavorite ? (
+        <button onClick={() => dispatch(removeMovie(movie))}>Remove from favorites</button>
+      ) : (
+        <button onClick={() => dispatch(addMovie(movie))}>Add to favorites</button>
+      )}
     </div>
   )
 }

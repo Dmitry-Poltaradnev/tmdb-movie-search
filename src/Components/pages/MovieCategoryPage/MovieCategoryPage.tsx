@@ -8,8 +8,10 @@ import {
 import { MovieSection } from '../../Movie/MovieSection/MovieSection.tsx'
 import { Link, useParams } from 'react-router-dom'
 
+export type CategoryType = 'popular' | 'top_rated' | 'now_playing' | 'upcoming'
+
 export const MovieCategoryPage = () => {
-  const { category } = useParams()
+  const { category } = useParams<{ category: CategoryType }>()
 
   const { data: popularMovies } = useGetPopularMoviesQuery()
   const { data: upcomingMovies } = useGetUpcomingMoviesQuery()
@@ -33,7 +35,7 @@ export const MovieCategoryPage = () => {
     </ul>
   )
 
-  const getCategory = (category: any) => {
+  const getCategory = (category: CategoryType) => {
     switch (category) {
       case 'popular':
         return { title: 'Popular Movies', movies: popularMovies }
@@ -47,7 +49,8 @@ export const MovieCategoryPage = () => {
         return { title: 'Popular Movies', movies: popularMovies }
     }
   }
-  const categoryVal = getCategory(category)
+
+  const categoryVal = getCategory(category as CategoryType)
 
   return (
     <section className={s.MovieCategoryPage}>

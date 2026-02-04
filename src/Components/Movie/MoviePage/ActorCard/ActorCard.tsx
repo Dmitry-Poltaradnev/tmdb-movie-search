@@ -1,6 +1,16 @@
 import s from './ActorCard.module.css'
+import type { ActorType } from '../MoviePage.tsx'
 
-export const ActorCard = (actor: any) => {
+type ActorCardProps = {
+  actor: ActorType
+}
+
+export type MovieCastType = {
+  id: number
+  cast: ActorType[]
+}
+
+export const ActorCard = (actor: ActorCardProps) => {
   const { character, name, profile_path } = actor.actor || {}
   return (
     <li className={s.actorCard}>

@@ -6,23 +6,33 @@ import {
   useGetUpcomingMoviesQuery,
 } from '../../api/tmdbApi.ts'
 import { WelcomeSection } from '../WelcomeSection/WelcomeSection.tsx'
+import { useRef } from 'react'
 
 export const Main = () => {
   const { data: popularMovies } = useGetPopularMoviesQuery()
   const { data: upcomingMovies } = useGetUpcomingMoviesQuery()
-  const { data: NowPlayingMovies } = useGetNowPlayingMoviesQuery()
-  const { data: TopRatedMovies } = useGetTopRatedMoviesQuery()
+  const { data: nowPlayingMovies } = useGetNowPlayingMoviesQuery()
+  const { data: topRatedMovies } = useGetTopRatedMoviesQuery()
 
-  const getRandomPoster = () => {
-    if (!popularMovies?.results?.length) return 0
-    return Math.floor(Math.random() * popularMovies.results.length)
+  const randomPosterRef = useRef<number | null>(null)
+
+  if (randomPosterRef.current === null && popularMovies?.results?.length) {
+    randomPosterRef.current = Math.floor(Math.random() * popularMovies.results.length)
   }
 
-  const randomPoster = getRandomPoster()
+  if (!popularMovies || !upcomingMovies || !nowPlayingMovies || !topRatedMovies) {
+    return <p>Loading...</p>
+  }
+
+  const randomPoster = randomPosterRef.current ?? 0
   return (
     <>
       <WelcomeSection
-        picture={`https://image.tmdb.org/t/p/w500${popularMovies?.results[randomPoster]?.backdrop_path}`}
+        picture={
+          randomPoster
+            ? `https://image.tmdb.org/t/p/w500${popularMovies?.results[randomPoster]?.backdrop_path}`
+            : `https://image.tmdb.org/t/p/w500${popularMovies?.results[0]?.backdrop_path}`
+        }
       />
       <MovieSection
         title={'Popular Movie'}
@@ -33,7 +43,7 @@ export const Main = () => {
       <MovieSection
         title={'Top Rated Movie'}
         category={'top_rated'}
-        movies={TopRatedMovies}
+        movies={topRatedMovies}
         fullSection={false}
       />
       <MovieSection
@@ -45,7 +55,7 @@ export const Main = () => {
       <MovieSection
         title={'Now Playing Movie'}
         category={'now_playing'}
-        movies={NowPlayingMovies}
+        movies={nowPlayingMovies}
         fullSection={false}
       />
     </>
