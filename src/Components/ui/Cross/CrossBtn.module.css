@@ -1,0 +1,23 @@
+.clearBtn {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.crossSvg {
+    color: white;
+    transition: 0.2s ease;
+}
+
+.clearBtn:hover .crossSvg {
+    color: red;
+}
+
+.clearBtn:disabled .crossSvg {
+    opacity: 0.5;
+    color: white;
+}

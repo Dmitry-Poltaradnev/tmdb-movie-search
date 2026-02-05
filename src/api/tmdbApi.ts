@@ -23,6 +23,7 @@ export const api = createApi({
     'MovieDetails',
     'MovieActors',
     'SimilarMovies',
+    'MoviesByTitle',
   ],
 
   endpoints: (builder) => ({
@@ -54,6 +55,15 @@ export const api = createApi({
       query: (movie_id) => `movie/${movie_id}/similar`,
       providesTags: ['SimilarMovies'],
     }),
+    getMoviesByTitle: builder.query<MoviesTypes, string>({
+      query: (title) => ({
+        url: 'search/movie',
+        params: {
+          query: title,
+        },
+      }),
+      providesTags: ['MoviesByTitle'],
+    }),
   }),
 })
 
@@ -65,4 +75,5 @@ export const {
   useGetMovieDetailsQuery,
   useGetMovieActorsQuery,
   useGetSimilarMoviesQuery,
+  useGetMoviesByTitleQuery,
 } = api

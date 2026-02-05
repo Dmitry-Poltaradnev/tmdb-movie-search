@@ -25,6 +25,7 @@ export const MainPage = () => {
   }
 
   const randomPoster = randomPosterRef.current ?? 0
+
   return (
     <>
       <WelcomeSection

@@ -19,8 +19,8 @@ export type MoviesTypes = {
 
 export type MovieSectionPropsType = {
   movies: MoviesTypes
-  title: string
-  category: CategoryType
+  title?: string
+  category?: CategoryType
   fullSection: boolean
 }
 
