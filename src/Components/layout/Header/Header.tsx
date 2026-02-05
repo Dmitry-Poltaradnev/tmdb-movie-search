@@ -1,9 +1,9 @@
-import { Logo } from '../../assets/Logo.tsx'
+import { Logo } from '../../../assets/icons/Logo.tsx'
 import s from './Header.module.css'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleTheme } from '../../features/theme/themeSlices.ts'
-import type { RootState } from '../../redux/store.ts'
+import { toggleTheme } from '../../../features/theme/themeSlices.ts'
+import type { RootState } from '../../../app/store.ts'
 
 export const Header = () => {
   const dispatch = useDispatch()

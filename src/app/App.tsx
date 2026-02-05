@@ -1,11 +1,11 @@
 import './App.css'
-import { Header } from './Components/Header/Header.tsx'
-import { Footer } from './Components/Footer/Footer.tsx'
+import { Header } from '../Components/layout/Header/Header.tsx'
+import { Footer } from '../Components/layout/Footer/Footer.tsx'
 import { Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import type { Theme } from './features/theme/themeSlices.ts'
+import type { Theme } from '../features/theme/themeSlices.ts'
 import { useEffect } from 'react'
-import type { RootState } from './redux/store.ts'
+import type { RootState } from './store.ts'
 
 function App() {
   const theme: Theme = useSelector((state: RootState) => state.theme.theme)

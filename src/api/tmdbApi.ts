@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { apiKey } from '../apiKeys.ts'
-import type { MoviesTypes } from '../Components/Movie/MovieSection/MovieSection.tsx'
-import type { MovieDetailsType } from '../Components/Movie/MoviePage/MoviePage.tsx'
-import type { MovieCastType } from '../Components/Movie/MoviePage/ActorCard/ActorCard.tsx'
+import type { MoviesTypes } from '../features/movies/components/MovieSection/MovieSection.tsx'
+import type { MovieDetailsType } from '../features/movies/components/MoviePage/MoviePage.tsx'
+import type { MovieCastType } from '../features/movies/components/ActorCard/ActorCard.tsx'
 
 export const api = createApi({
   reducerPath: 'tmdbApi',

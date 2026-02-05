@@ -1,12 +1,8 @@
 import s from './MovieCard.module.css'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import {
-  addMovie,
-  type MovieType,
-  removeMovie,
-} from '../../../features/favorites/favoritesSlices.ts'
-import { store } from '../../../redux/store.ts'
+import { addMovie, type MovieType, removeMovie } from '../../../favorites/favoritesSlices.ts'
+import { store } from '../../../../app/store.ts'
 
 type MovieCardPropsType = {
   movie: MovieType

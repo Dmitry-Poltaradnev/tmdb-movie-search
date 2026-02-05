@@ -1,14 +1,14 @@
-import { MovieSection } from '../Movie/MovieSection/MovieSection.tsx'
+import { MovieSection } from '../../components/MovieSection/MovieSection.tsx'
 import {
   useGetNowPlayingMoviesQuery,
   useGetPopularMoviesQuery,
   useGetTopRatedMoviesQuery,
   useGetUpcomingMoviesQuery,
-} from '../../api/tmdbApi.ts'
-import { WelcomeSection } from '../WelcomeSection/WelcomeSection.tsx'
+} from '../../../../api/tmdbApi.ts'
+import { WelcomeSection } from '../../components/WelcomeSection/WelcomeSection.tsx'
 import { useRef } from 'react'
 
-export const Main = () => {
+export const MainPage = () => {
   const { data: popularMovies } = useGetPopularMoviesQuery()
   const { data: upcomingMovies } = useGetUpcomingMoviesQuery()
   const { data: nowPlayingMovies } = useGetNowPlayingMoviesQuery()

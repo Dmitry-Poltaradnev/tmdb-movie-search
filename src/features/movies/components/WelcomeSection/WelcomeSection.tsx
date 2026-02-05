@@ -1,4 +1,4 @@
-import { SearchMovieBlock } from '../SearchMovieBlock/SearchMovieBlock.tsx'
+import { SearchMovieBlock } from '../../../../Components/SearchMovieBlock/SearchMovieBlock.tsx'
 import s from './WelcomeSection.module.css'
 
 type WelcomeSectionProps = {

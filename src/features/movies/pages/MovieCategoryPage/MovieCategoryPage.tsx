@@ -4,8 +4,8 @@ import {
   useGetPopularMoviesQuery,
   useGetTopRatedMoviesQuery,
   useGetUpcomingMoviesQuery,
-} from '../../../api/tmdbApi.ts'
-import { MovieSection } from '../../Movie/MovieSection/MovieSection.tsx'
+} from '../../../../api/tmdbApi.ts'
+import { MovieSection } from '../../components/MovieSection/MovieSection.tsx'
 import { Link, useParams } from 'react-router-dom'
 
 export type CategoryType = 'popular' | 'top_rated' | 'now_playing' | 'upcoming'

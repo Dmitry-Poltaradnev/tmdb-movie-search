@@ -4,10 +4,10 @@ import {
   useGetMovieActorsQuery,
   useGetMovieDetailsQuery,
   useGetSimilarMoviesQuery,
-} from '../../../api/tmdbApi.ts'
-import { ActorCard } from './ActorCard/ActorCard.tsx'
+} from '../../../../api/tmdbApi.ts'
+import { ActorCard } from '../ActorCard/ActorCard.tsx'
 import { MovieCard } from '../MovieCard/MovieCard.tsx'
-import type { MovieType } from '../../../features/favorites/favoritesSlices.ts'
+import type { MovieType } from '../../../favorites/favoritesSlices.ts'
 
 export type GenreType = {
   id: number

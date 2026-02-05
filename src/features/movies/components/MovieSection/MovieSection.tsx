@@ -2,7 +2,7 @@ import { MovieCard } from '../MovieCard/MovieCard.tsx'
 import s from './MovieSection.module.css'
 import { Link } from 'react-router-dom'
 import type { CategoryType } from '../../pages/MovieCategoryPage/MovieCategoryPage.tsx'
-import type { MovieType } from '../../../features/favorites/favoritesSlices.ts'
+import type { MovieType } from '../../../favorites/favoritesSlices.ts'
 
 type Dates = {
   maximum: string
