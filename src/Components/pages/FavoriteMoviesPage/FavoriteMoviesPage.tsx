@@ -1,8 +1,8 @@
 import s from './FavoriteMoviesPage.module.css'
 import { useSelector } from 'react-redux'
-import type { RootState } from '@reduxjs/toolkit/query'
 import { MovieCard } from '../../Movie/MovieCard/MovieCard.tsx'
 import type { MovieType } from '../../../features/favorites/favoritesSlices.ts'
+import type { RootState } from '../../../redux/store.ts'
 
 export const FavoriteMoviesPage = () => {
   const movies = useSelector((state: RootState) => state.favoriteMovies)

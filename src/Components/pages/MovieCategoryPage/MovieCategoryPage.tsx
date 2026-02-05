@@ -52,6 +52,10 @@ export const MovieCategoryPage = () => {
 
   const categoryVal = getCategory(category as CategoryType)
 
+  if (!categoryVal.movies || !category) {
+    return <div>Loading...</div>
+  }
+
   return (
     <section className={s.MovieCategoryPage}>
       <h3>Movie Category page : {category}</h3>
