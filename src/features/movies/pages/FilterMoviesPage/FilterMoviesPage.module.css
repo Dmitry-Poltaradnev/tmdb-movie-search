@@ -1,2 +1,32 @@
 .filterMoviesPage {
 }
+
+.genresList {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.genresItem {
+
+}
+
+.genresItem button {
+    border: 1px solid lightgray;
+    background: none;
+    border-radius: 10px;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.genresItem button:hover {
+    background: #1a1a1a;
+    color: white;
+}
+
+.genresItem button:active {
+    background: #1a1a1a;
+    color: white;
+}

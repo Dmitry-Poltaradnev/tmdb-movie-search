@@ -3,6 +3,7 @@ import { apiKey } from '../apiKeys.ts'
 import type { MoviesTypes } from '../features/movies/components/MovieSection/MovieSection.tsx'
 import type { MovieDetailsType } from '../features/movies/components/MoviePage/MoviePage.tsx'
 import type { MovieCastType } from '../features/movies/components/ActorCard/ActorCard.tsx'
+import type { GenresResponse } from '../types/types.ts'
 
 export const api = createApi({
   reducerPath: 'tmdbApi',
@@ -24,6 +25,8 @@ export const api = createApi({
     'MovieActors',
     'SimilarMovies',
     'MoviesByTitle',
+    'FilteredMovies',
+    'GenresMovies',
   ],
 
   endpoints: (builder) => ({
@@ -64,6 +67,20 @@ export const api = createApi({
       }),
       providesTags: ['MoviesByTitle'],
     }),
+    // ===========================
+    getFilteredMovies: builder.query<MoviesTypes, string>({
+      query: (genres) => ({
+        url: 'search/movie',
+        params: {
+          query: genres,
+        },
+      }),
+      providesTags: ['FilteredMovies'],
+    }),
+    getGenresMovies: builder.query<GenresResponse, void>({
+      query: () => 'genre/movie/list',
+      providesTags: ['GenresMovies'],
+    }),
   }),
 })
 
@@ -76,4 +93,6 @@ export const {
   useGetMovieActorsQuery,
   useGetSimilarMoviesQuery,
   useGetMoviesByTitleQuery,
+  useGetGenresMoviesQuery,
+  useGetFilteredMoviesQuery,
 } = api

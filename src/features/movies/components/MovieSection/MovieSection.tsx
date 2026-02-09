@@ -27,7 +27,7 @@ export type MovieSectionPropsType = {
 export const MovieSection = ({ title, movies, category, fullSection }: MovieSectionPropsType) => {
   return (
     <section className={s.movieSection}>
-      <h3>Category : {title}</h3>
+      {category ? <h3>Category : {title}</h3> : null}
       <div className={s.movieCardsWrapper}>
         {movies?.results?.map((item: MovieType, index: number) => {
           if (!fullSection) {
