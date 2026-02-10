@@ -3,7 +3,7 @@ import { apiKey } from '../apiKeys.ts'
 import type { MoviesTypes } from '../features/movies/components/MovieSection/MovieSection.tsx'
 import type { MovieDetailsType } from '../features/movies/components/MoviePage/MoviePage.tsx'
 import type { MovieCastType } from '../features/movies/components/ActorCard/ActorCard.tsx'
-import type { GenresResponse } from '../types/types.ts'
+import type { GenreMovie, GenresResponse, VoteAverage } from '../types/types.ts'
 
 export const api = createApi({
   reducerPath: 'tmdbApi',
@@ -68,11 +68,16 @@ export const api = createApi({
       providesTags: ['MoviesByTitle'],
     }),
     // ===========================
-    getFilteredMovies: builder.query<MoviesTypes, string>({
-      query: (genres) => ({
-        url: 'search/movie',
+    getFilteredMovies: builder.query<
+      MoviesTypes,
+      { genres: GenreMovie[]; vote_average: VoteAverage }
+    >({
+      query: ({ genres, vote_average }) => ({
+        url: 'discover/movie',
         params: {
-          query: genres,
+          with_genres: genres.map((i: GenreMovie) => i.id).join(','),
+          'vote_average.gte': vote_average[0] / 10,
+          'vote_average.lte': vote_average[1] / 10,
         },
       }),
       providesTags: ['FilteredMovies'],

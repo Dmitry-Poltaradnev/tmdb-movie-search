@@ -5,3 +5,4 @@ export type GenreMovie = {
 export type GenresResponse = {
   genres: GenreMovie[]
 }
+export type VoteAverage = number[]

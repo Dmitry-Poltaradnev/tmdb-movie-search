@@ -12,21 +12,34 @@
 
 }
 
-.genresItem button {
-    border: 1px solid lightgray;
-    background: none;
+.nonActiveGenre {
+    border: 1px solid black;
+    background: white;
     border-radius: 10px;
-    color: #1a1a1a;
+    color: black;
     cursor: pointer;
     transition: 0.3s ease;
 }
 
-.genresItem button:hover {
-    background: #1a1a1a;
+.nonActiveGenre:hover {
+    background: gray;
     color: white;
+    border: 1px solid gray;
 }
 
-.genresItem button:active {
-    background: #1a1a1a;
+
+.activeGenre {
+    background: black;
     color: white;
+    border: 1px solid black;
+}
+
+.filterOptionsWrapper {
+
+}
+
+.contentWrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
