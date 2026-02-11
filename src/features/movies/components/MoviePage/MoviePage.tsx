@@ -8,6 +8,7 @@ import {
 import { ActorCard } from '../ActorCard/ActorCard.tsx'
 import { MovieCard } from '../MovieCard/MovieCard.tsx'
 import type { MovieType } from '../../../favorites/favoritesSlices.ts'
+import { Button } from '../../../../Components/ui/Button/Button.tsx'
 
 export type GenreType = {
   id: number
@@ -85,7 +86,7 @@ export const MoviePage = () => {
           )}
         </div>
       </div>
-      <button onClick={() => navigate(-1)}>Back</button>
+      <Button title={'Back'} callBack={() => navigate(-1)} />
     </div>
   )
 }

@@ -2,6 +2,7 @@ import s from './SearchMovieBlock.module.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CrossBtn } from '../ui/Cross/CrossBtn.tsx'
+import { Button } from '../ui/Button/Button.tsx'
 
 export const SearchMovieBlock = () => {
   const [inputVal, setInputVal] = useState('')
@@ -33,9 +34,7 @@ export const SearchMovieBlock = () => {
         />
         <CrossBtn isDisable={checkDisable()} removeVal={() => setInputVal('')} />
       </div>
-      <button disabled={checkDisable()} onClick={searchMovie}>
-        Search
-      </button>
+      <Button title={'Search'} callBack={searchMovie} isDisabled={checkDisable()} />
     </div>
   )
 }

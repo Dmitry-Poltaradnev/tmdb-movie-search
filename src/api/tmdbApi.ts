@@ -67,24 +67,25 @@ export const api = createApi({
       }),
       providesTags: ['MoviesByTitle'],
     }),
+    getGenresMovies: builder.query<GenresResponse, void>({
+      query: () => 'genre/movie/list',
+      providesTags: ['GenresMovies'],
+    }),
     // ===========================
     getFilteredMovies: builder.query<
       MoviesTypes,
-      { genres: GenreMovie[]; vote_average: VoteAverage }
+      { genres: GenreMovie[]; vote_average: VoteAverage; sortValue: string }
     >({
-      query: ({ genres, vote_average }) => ({
+      query: ({ genres, vote_average, sortValue }) => ({
         url: 'discover/movie',
         params: {
           with_genres: genres.map((i: GenreMovie) => i.id).join(','),
           'vote_average.gte': vote_average[0] / 10,
           'vote_average.lte': vote_average[1] / 10,
+          sort_by: sortValue,
         },
       }),
       providesTags: ['FilteredMovies'],
-    }),
-    getGenresMovies: builder.query<GenresResponse, void>({
-      query: () => 'genre/movie/list',
-      providesTags: ['GenresMovies'],
     }),
   }),
 })

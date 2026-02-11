@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleTheme } from '../../../features/theme/themeSlices.ts'
 import type { RootState } from '../../../app/store.ts'
+import { Button } from '../../ui/Button/Button.tsx'
 
 export const Header = () => {
   const dispatch = useDispatch()
@@ -27,7 +28,7 @@ export const Header = () => {
           </li>
         ))}
       </ul>
-      <button onClick={() => dispatch(toggleTheme())}>Change Theme : {theme}</button>
+      <Button title={`Change Theme : ${theme}`} callBack={() => dispatch(toggleTheme())} />
     </div>
   )
 }

@@ -1,0 +1,16 @@
+.dropDownBox {
+    margin: 20px;
+}
+
+.dropDownSelect {
+    background-color: #f8fafc;
+    border: 1px solid black;
+    border-radius: 4px;
+    color: black;
+    font-size: 10px;
+}
+
+.dropDownInputLabel {
+    color: #f8fafc;
+    font-size: 20px;
+}

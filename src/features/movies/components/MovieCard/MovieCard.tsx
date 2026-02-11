@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { addMovie, type MovieType, removeMovie } from '../../../favorites/favoritesSlices.ts'
 import { store } from '../../../../app/store.ts'
+import { Button } from '../../../../Components/ui/Button/Button.tsx'
 
 type MovieCardPropsType = {
   movie: MovieType
@@ -31,9 +32,9 @@ export const MovieCard = ({ movie, isFavorite }: MovieCardPropsType) => {
         <p>Rate : {movie.vote_average}</p>
       </div>
       {isFavorite ? (
-        <button onClick={() => dispatch(removeMovie(movie))}>Remove from favorites</button>
+        <Button title={'Remove from favorites'} callBack={() => dispatch(removeMovie(movie))} />
       ) : (
-        <button onClick={() => dispatch(addMovie(movie))}>Add to favorites</button>
+        <Button title={'Add to favorites'} callBack={() => dispatch(addMovie(movie))} />
       )}
     </div>
   )
