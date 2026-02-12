@@ -12,7 +12,7 @@ import { useDebounceRating } from './debounce/debounceRating.ts'
 import { Button } from '../../../../Components/ui/Button/Button.tsx'
 import DropDown from '../../components/DropDown/DropDown.tsx'
 
-const sortValues = [
+const sortValues: SortValueType[] = [
   { sortOption: 'original_title.asc', title: 'Title A-Z' },
   { sortOption: 'original_title.desc', title: 'Title Z-A' },
   { sortOption: 'popularity.asc', title: 'Popularity from min to max' },
@@ -25,71 +25,62 @@ const sortValues = [
 
 export const FilterMoviesPage = () => {
   const [selectedGenres, setSelectedGenres] = useState<GenreMovie[]>([])
-
   const [voteAverage, setVoteAverage] = useState<number[]>([0, 100])
-
   const [sort, setSort] = useState<SortValueType>(sortValues[0])
 
-  const resetFilter = () => {
-    setSelectedGenres([])
-    setVoteAverage([0, 100])
-    setSort(sortValues[0])
-  }
+  const debouncedVoteAverage = useDebounceRating(voteAverage, 300)
+
   const isFiltered =
     selectedGenres.length > 0 ||
     voteAverage[0] !== 0 ||
     voteAverage[1] !== 100 ||
     sort.sortOption !== sortValues[0].sortOption
 
-  const debouncedVoteAverage = useDebounceRating(voteAverage, 200)
-
-  const { data } = useGetGenresMoviesQuery()
-
-  const { data: filteredMovies } = useGetFilteredMoviesQuery(
+  const filteredQuery = useGetFilteredMoviesQuery(
     {
       genres: selectedGenres,
       vote_average: debouncedVoteAverage,
       sortValue: sort.sortOption,
     },
-    {
-      skip: !isFiltered,
-    }
+    { skip: !isFiltered }
   )
 
-  const { data: popularMovies } = useGetPopularMoviesQuery(undefined, {
+  const popularQuery = useGetPopularMoviesQuery(undefined, {
     skip: isFiltered,
   })
 
-  const genres = data?.genres
+  const genresQuery = useGetGenresMoviesQuery()
 
-  const selectGenre = ({ genre }: { genre: GenreMovie }) => {
+  const moviesQuery = isFiltered ? filteredQuery : popularQuery
+
+  const selectGenre = (genre: GenreMovie) => {
     setSelectedGenres((prev) => {
-      const exist = prev.some((item) => item.id === genre.id)
-      if (exist) {
-        return prev.filter((item) => item.id !== genre.id)
-      }
-      return [...prev, genre]
+      const exists = prev.some((item) => item.id === genre.id)
+      return exists ? prev.filter((item) => item.id !== genre.id) : [...prev, genre]
     })
   }
-  const moviesToShow = isFiltered ? filteredMovies : popularMovies
 
-  if (!moviesToShow) {
-    return <div>Loading...</div>
+  const resetFilter = () => {
+    setSelectedGenres([])
+    setVoteAverage([0, 100])
+    setSort(sortValues[0])
   }
 
   return (
     <section className={s.filterMoviesPage}>
       <h3>Filtered Movies</h3>
+
       <div className={s.contentWrapper}>
         <div className={s.filterOptionsWrapper}>
           <DropDown values={sortValues} onChange={setSort} value={sort} />
-          {genres?.length ? (
+
+          {genresQuery.data?.genres?.length ? (
             <ul className={s.genresList}>
-              {genres.map((genre: GenreMovie) => (
+              {genresQuery.data.genres.map((genre: GenreMovie) => (
                 <li key={genre.id} className={s.genresItem}>
                   <Button
                     title={genre.name}
-                    callBack={() => selectGenre({ genre: genre })}
+                    callBack={() => selectGenre(genre)}
                     classNames={
                       selectedGenres.some((item) => item.id === genre.id)
                         ? s.activeGenre
@@ -100,12 +91,15 @@ export const FilterMoviesPage = () => {
               ))}
             </ul>
           ) : (
-            <div>We don't have genres options</div>
+            <div>Loading genres...</div>
           )}
-          <RangeSlider value={debouncedVoteAverage} onChange={setVoteAverage} />
-          <Button title={'Reset Filters'} callBack={resetFilter} />
+
+          <RangeSlider value={voteAverage} onChange={setVoteAverage} />
+
+          <Button title="Reset Filters" callBack={resetFilter} />
         </div>
-        <MovieSection fullSection={true} movies={moviesToShow} />
+
+        <MovieSection fullSection={true} query={moviesQuery} />
       </div>
     </section>
   )

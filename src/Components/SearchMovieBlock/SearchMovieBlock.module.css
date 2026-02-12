@@ -1,18 +1,18 @@
 .searchMovieBlock {
-    display: flex;
-    justify-content: space-between;
-    max-width: 20%;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 20%;
+  align-items: center;
+  gap: 20px;
 }
 
 .searchInput {
-    border-radius: 5px;
-    padding: 10px;
-    border: none;
-    outline: none;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  outline: none;
 }
 
 .inputWrapper {
-    position: relative;
+  position: relative;
 }

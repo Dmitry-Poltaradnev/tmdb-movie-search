@@ -25,7 +25,11 @@ export const MovieCard = ({ movie, isFavorite }: MovieCardPropsType) => {
       <div onClick={handleClick}>
         <img
           className={s.movieImg}
-          src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+          src={
+            movie.backdrop_path
+              ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+              : 'https://placehold.co/160x160'
+          }
           alt="movieImg"
         />
         <p>Title : {movie.title}</p>

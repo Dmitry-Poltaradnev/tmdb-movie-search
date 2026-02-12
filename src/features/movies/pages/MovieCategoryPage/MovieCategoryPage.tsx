@@ -13,57 +13,49 @@ export type CategoryType = 'popular' | 'top_rated' | 'now_playing' | 'upcoming'
 export const MovieCategoryPage = () => {
   const { category } = useParams<{ category: CategoryType }>()
 
-  const { data: popularMovies } = useGetPopularMoviesQuery()
-  const { data: upcomingMovies } = useGetUpcomingMoviesQuery()
-  const { data: NowPlayingMovies } = useGetNowPlayingMoviesQuery()
-  const { data: TopRatedMovies } = useGetTopRatedMoviesQuery()
+  const popularQuery = useGetPopularMoviesQuery()
+  const upcomingQuery = useGetUpcomingMoviesQuery()
+  const nowPlayingQuery = useGetNowPlayingMoviesQuery()
+  const topRatedQuery = useGetTopRatedMoviesQuery()
 
-  const categoryMassBtn = [
-    { title: 'Popular', category: 'popular' },
-    { title: 'Upcoming', category: 'upcoming' },
-    { title: 'Now Playing', category: 'now_playing' },
-    { title: 'Top Rated', category: 'top_rated' },
-  ]
-
-  const Btns = (
-    <ul>
-      {categoryMassBtn.map((btn) => (
-        <li key={btn.category}>
-          <Link to={`/movie/category/${btn.category}`}>{btn.title}</Link>
-        </li>
-      ))}
-    </ul>
-  )
-
-  const getCategory = (category: CategoryType) => {
-    switch (category) {
-      case 'popular':
-        return { title: 'Popular Movies', movies: popularMovies }
-      case 'upcoming':
-        return { title: 'Upcoming Movies', movies: upcomingMovies }
-      case 'now_playing':
-        return { title: 'Now Playing Movies', movies: NowPlayingMovies }
-      case 'top_rated':
-        return { title: 'Top Rated', movies: TopRatedMovies }
-      default:
-        return { title: 'Popular Movies', movies: popularMovies }
-    }
+  const categories = {
+    popular: {
+      title: 'Popular Movies',
+      query: popularQuery,
+    },
+    upcoming: {
+      title: 'Upcoming Movies',
+      query: upcomingQuery,
+    },
+    now_playing: {
+      title: 'Now Playing Movies',
+      query: nowPlayingQuery,
+    },
+    top_rated: {
+      title: 'Top Rated Movies',
+      query: topRatedQuery,
+    },
   }
 
-  const categoryVal = getCategory(category as CategoryType)
-
-  if (!categoryVal.movies || !category) {
-    return <div>Loading...</div>
-  }
+  const currentCategory =
+    category && categories[category] ? categories[category] : categories.popular
 
   return (
     <section className={s.MovieCategoryPage}>
-      <h3>Movie Category page : {category}</h3>
-      {Btns}
+      <h3>Movie Category page: {category ?? 'popular'}</h3>
+
+      <ul>
+        {Object.entries(categories).map(([key, value]) => (
+          <li key={key}>
+            <Link to={`/movie/category/${key}`}>{value.title}</Link>
+          </li>
+        ))}
+      </ul>
+
       <MovieSection
-        movies={categoryVal.movies}
+        query={currentCategory.query}
         category={category}
-        title={categoryVal.title}
+        title={currentCategory.title}
         fullSection={true}
       />
     </section>

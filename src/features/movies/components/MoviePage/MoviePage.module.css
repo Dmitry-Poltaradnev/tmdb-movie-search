@@ -17,3 +17,6 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+.moviePoster {
+  border-radius: 10px;
+}

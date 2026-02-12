@@ -8,17 +8,17 @@ export const SearchMoviePage = () => {
   const [searchParams] = useSearchParams()
   const title = searchParams.get('query') ?? ''
 
-  const { data: movies, isFetching } = useGetMoviesByTitleQuery(title, {
+  const movies = useGetMoviesByTitleQuery(title, {
     skip: !title,
   })
-  if (isFetching) return <div>Loading...</div>
+  // if (isFetching) return <div>Loading...</div>
 
   return (
     <section className={s.SearchMoviePage}>
       <h3>Search Movie Page</h3>
       <SearchMovieBlock />
       {movies ? (
-        <MovieSection fullSection={true} movies={movies} title={'All Movies with name...'} />
+        <MovieSection fullSection={true} query={movies} title={'All Movies with name...'} />
       ) : (
         <div>Try to search movie</div>
       )}

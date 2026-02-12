@@ -55,7 +55,15 @@ export const MoviePage = () => {
   if (!movie) return <div>Loading...</div>
   return (
     <div className={s.moviePage}>
-      <img src={`https://image.tmdb.org/t/p/w500${backdrop_path}`} alt="moviePoster" />
+      <img
+        className={s.moviePoster}
+        src={
+          backdrop_path
+            ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+            : 'https://placehold.co/400x300'
+        }
+        alt="Movie Poster"
+      />
       <h4>Title: {title}</h4>
       <p>Release data: {release_date}</p>
       <p>Rating: {vote_average}</p>

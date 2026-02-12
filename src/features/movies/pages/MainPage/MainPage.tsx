@@ -9,20 +9,20 @@ import { WelcomeSection } from '../../components/WelcomeSection/WelcomeSection.t
 import { useRef } from 'react'
 
 export const MainPage = () => {
-  const { data: popularMovies } = useGetPopularMoviesQuery()
-  const { data: upcomingMovies } = useGetUpcomingMoviesQuery()
-  const { data: nowPlayingMovies } = useGetNowPlayingMoviesQuery()
-  const { data: topRatedMovies } = useGetTopRatedMoviesQuery()
+  const popularMovies = useGetPopularMoviesQuery()
+  const upcomingMovies = useGetUpcomingMoviesQuery()
+  const nowPlayingMovies = useGetNowPlayingMoviesQuery()
+  const topRatedMovies = useGetTopRatedMoviesQuery()
 
   const randomPosterRef = useRef<number | null>(null)
 
-  if (randomPosterRef.current === null && popularMovies?.results?.length) {
-    randomPosterRef.current = Math.floor(Math.random() * popularMovies.results.length)
+  if (randomPosterRef.current === null && popularMovies?.data?.results?.length) {
+    randomPosterRef.current = Math.floor(Math.random() * popularMovies?.data.results.length)
   }
 
-  if (!popularMovies || !upcomingMovies || !nowPlayingMovies || !topRatedMovies) {
-    return <p>Loading...</p>
-  }
+  // if (!popularMovies || !upcomingMovies || !nowPlayingMovies || !topRatedMovies) {
+  //   return <p>Loading...</p>
+  // }
 
   const randomPoster = randomPosterRef.current ?? 0
 
@@ -31,32 +31,32 @@ export const MainPage = () => {
       <WelcomeSection
         picture={
           randomPoster
-            ? `https://image.tmdb.org/t/p/w500${popularMovies?.results[randomPoster]?.backdrop_path}`
-            : `https://image.tmdb.org/t/p/w500${popularMovies?.results[0]?.backdrop_path}`
+            ? `https://image.tmdb.org/t/p/w500${popularMovies?.data?.results[randomPoster]?.backdrop_path}`
+            : `https://image.tmdb.org/t/p/w500${popularMovies?.data?.results[0]?.backdrop_path}`
         }
       />
       <MovieSection
         title={'Popular Movie'}
         category={'popular'}
-        movies={popularMovies}
+        query={popularMovies}
         fullSection={false}
       />
       <MovieSection
         title={'Top Rated Movie'}
         category={'top_rated'}
-        movies={topRatedMovies}
+        query={topRatedMovies}
         fullSection={false}
       />
       <MovieSection
         title={'Upcoming Movie'}
         category={'upcoming'}
-        movies={upcomingMovies}
+        query={upcomingMovies}
         fullSection={false}
       />
       <MovieSection
         title={'Now Playing Movie'}
         category={'now_playing'}
-        movies={nowPlayingMovies}
+        query={nowPlayingMovies}
         fullSection={false}
       />
     </>
