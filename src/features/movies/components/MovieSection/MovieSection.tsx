@@ -3,7 +3,7 @@ import s from './MovieSection.module.css'
 import { Link } from 'react-router-dom'
 import type { CategoryType } from '../../pages/MovieCategoryPage/MovieCategoryPage.tsx'
 import type { MovieType } from '../../../favorites/favoritesSlices.ts'
-import { MoviesCardSkeleton } from '../../../../Components/ui/Skeletons/MoviesCardSkeleton.tsx'
+import { MoviesCardSkeleton } from '../../../../Components/ui/Skeletons/MovierCardSkeleton/MoviesCardSkeleton.tsx'
 
 type Dates = {
   maximum: string
@@ -31,8 +31,9 @@ type MovieSectionPropsType = {
 
 export const MovieSection = ({ query, title, category, fullSection }: MovieSectionPropsType) => {
   const { data, isLoading, isFetching } = query
+
   const showSkeleton = isLoading || isFetching || !data
-  // const showSkeleton = isFetching
+
   return (
     <section className={s.movieSection}>
       {category ? <h3>Category : {title}</h3> : null}
@@ -49,6 +50,7 @@ export const MovieSection = ({ query, title, category, fullSection }: MovieSecti
                 return <MovieCard key={item.id} movie={item} isFavorite={false} />
               }
             })}
+
         {!fullSection && !showSkeleton && <Link to={`/movie/category/${category}`}>View More</Link>}
       </div>
     </section>

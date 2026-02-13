@@ -1,0 +1,20 @@
+.cardSkeleton {
+    width: 180px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.posterSkeleton {
+    border-radius: 5px;
+}
+
+.descSkeleton {
+    border-radius: 5px;
+}
+
+.buttonSkeleton {
+    border-radius: 5px;
+}

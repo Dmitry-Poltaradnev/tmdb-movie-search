@@ -9,6 +9,7 @@ import { ActorCard } from '../ActorCard/ActorCard.tsx'
 import { MovieCard } from '../MovieCard/MovieCard.tsx'
 import type { MovieType } from '../../../favorites/favoritesSlices.ts'
 import { Button } from '../../../../Components/ui/Button/Button.tsx'
+import { MoviePageSkeleton } from '../../../../Components/ui/Skeletons/MoviePageSkeleton/MoviePageSkeleton.tsx'
 
 export type GenreType = {
   id: number
@@ -52,14 +53,16 @@ export const MoviePage = () => {
   const { backdrop_path, genres, overview, runtime, title, vote_average, release_date } =
     movie || {}
 
-  if (!movie) return <div>Loading...</div>
+  if (!movie || !people || !similarMovies) {
+    return <MoviePageSkeleton />
+  }
   return (
     <div className={s.moviePage}>
       <img
         className={s.moviePoster}
         src={
           backdrop_path
-            ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+            ? `https://image.tmdb.org/t/p/w500${backdrop_path}`
             : 'https://placehold.co/400x300'
         }
         alt="Movie Poster"

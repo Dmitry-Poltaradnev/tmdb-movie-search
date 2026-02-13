@@ -11,7 +11,6 @@ export const SearchMoviePage = () => {
   const movies = useGetMoviesByTitleQuery(title, {
     skip: !title,
   })
-  // if (isFetching) return <div>Loading...</div>
 
   return (
     <section className={s.SearchMoviePage}>

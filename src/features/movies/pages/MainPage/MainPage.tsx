@@ -7,6 +7,7 @@ import {
 } from '../../../../api/tmdbApi.ts'
 import { WelcomeSection } from '../../components/WelcomeSection/WelcomeSection.tsx'
 import { useRef } from 'react'
+import { WelcomeSectionSkeleton } from '../../../../Components/ui/Skeletons/WelcomeSectionSkeleton/WelcomeSectionSkeleton.tsx'
 
 export const MainPage = () => {
   const popularMovies = useGetPopularMoviesQuery()
@@ -14,27 +15,25 @@ export const MainPage = () => {
   const nowPlayingMovies = useGetNowPlayingMoviesQuery()
   const topRatedMovies = useGetTopRatedMoviesQuery()
 
+  const { data, isLoading } = popularMovies
+
   const randomPosterRef = useRef<number | null>(null)
 
-  if (randomPosterRef.current === null && popularMovies?.data?.results?.length) {
-    randomPosterRef.current = Math.floor(Math.random() * popularMovies?.data.results.length)
+  if (randomPosterRef.current === null && data?.results?.length) {
+    randomPosterRef.current = Math.floor(Math.random() * data.results.length)
   }
 
-  // if (!popularMovies || !upcomingMovies || !nowPlayingMovies || !topRatedMovies) {
-  //   return <p>Loading...</p>
-  // }
+  const randomPosterIndex = randomPosterRef.current ?? 0
 
-  const randomPoster = randomPosterRef.current ?? 0
+  const backdropPath = data?.results?.[randomPosterIndex]?.backdrop_path ?? ''
 
   return (
     <>
-      <WelcomeSection
-        picture={
-          randomPoster
-            ? `https://image.tmdb.org/t/p/w500${popularMovies?.data?.results[randomPoster]?.backdrop_path}`
-            : `https://image.tmdb.org/t/p/w500${popularMovies?.data?.results[0]?.backdrop_path}`
-        }
-      />
+      {isLoading || !data ? (
+        <WelcomeSectionSkeleton />
+      ) : (
+        <WelcomeSection picture={`https://image.tmdb.org/t/p/w500${backdropPath}`} />
+      )}
       <MovieSection
         title={'Popular Movie'}
         category={'popular'}
