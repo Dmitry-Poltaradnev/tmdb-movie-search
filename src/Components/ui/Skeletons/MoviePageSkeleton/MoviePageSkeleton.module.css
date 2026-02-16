@@ -1,17 +1,15 @@
 .moviePageSkeletonWrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .moviePageSkeletonFirst {
-    border-radius: 5px;
-
+  border-radius: 5px;
 }
 
 .moviePageSkeletonSecond {
-    border-radius: 5px;
-
+  border-radius: 5px;
 }
