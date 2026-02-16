@@ -1,12 +1,13 @@
 import s from './MovieCard.module.css'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { addMovie, type MovieType, removeMovie } from '../../../favorites/favoritesSlices.ts'
+import { addMovie, removeMovie } from '../../../slices/favorites/favoritesSlices.ts'
 import { store } from '../../../../app/store.ts'
 import { Button } from '../../../../Components/ui/Button/Button.tsx'
+import type { MovieTypes } from '../../../../api/schema/movies.schema.ts'
 
 type MovieCardPropsType = {
-  movie: MovieType
+  movie: MovieTypes
   isFavorite: boolean
 }
 

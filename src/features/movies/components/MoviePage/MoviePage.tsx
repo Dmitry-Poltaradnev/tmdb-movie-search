@@ -7,9 +7,10 @@ import {
 } from '../../../../api/tmdbApi.ts'
 import { ActorCard } from '../ActorCard/ActorCard.tsx'
 import { MovieCard } from '../MovieCard/MovieCard.tsx'
-import type { MovieType } from '../../../favorites/favoritesSlices.ts'
+
 import { Button } from '../../../../Components/ui/Button/Button.tsx'
 import { MoviePageSkeleton } from '../../../../Components/ui/Skeletons/MoviePageSkeleton/MoviePageSkeleton.tsx'
+import type { MovieTypes } from '../../../../api/schema/movies.schema.ts'
 
 export type GenreType = {
   id: number
@@ -90,7 +91,7 @@ export const MoviePage = () => {
             <p>We don't have similar movies</p>
           ) : (
             <ul className={s.similarMoviesWrap}>
-              {similarMovies.results.map((movie: MovieType, i: number) =>
+              {similarMovies.results.map((movie: MovieTypes, i: number) =>
                 i < 6 ? <MovieCard key={movie.id} movie={movie} isFavorite={false} /> : null
               )}
             </ul>

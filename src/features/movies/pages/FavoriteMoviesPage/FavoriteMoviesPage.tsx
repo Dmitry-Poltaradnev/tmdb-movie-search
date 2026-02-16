@@ -1,7 +1,7 @@
 import s from './FavoriteMoviesPage.module.css'
 import { useSelector } from 'react-redux'
 import { MovieCard } from '../../components/MovieCard/MovieCard.tsx'
-import type { MovieType } from '../../../favorites/favoritesSlices.ts'
+import type { MovieType } from '../../../slices/favorites/favoritesSlices.ts'
 import type { RootState } from '../../../../app/store.ts'
 
 export const FavoriteMoviesPage = () => {

@@ -2,7 +2,7 @@ import { Logo } from '../../../assets/icons/Logo.tsx'
 import s from './Header.module.css'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleTheme } from '../../../features/theme/themeSlices.ts'
+import { toggleTheme } from '../../../features/slices/theme/themeSlices.ts'
 import type { RootState } from '../../../app/store.ts'
 import { Button } from '../../ui/Button/Button.tsx'
 

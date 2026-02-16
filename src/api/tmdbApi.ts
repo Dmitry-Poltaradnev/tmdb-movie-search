@@ -1,21 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { apiKey } from '../apiKeys.ts'
-import type { MoviesTypes } from '../features/movies/components/MovieSection/MovieSection.tsx'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import type { MovieDetailsType } from '../features/movies/components/MoviePage/MoviePage.tsx'
 import type { MovieCastType } from '../features/movies/components/ActorCard/ActorCard.tsx'
 import type { GenreMovie, GenresResponse, VoteAverage } from '../types/types.ts'
+import { baseQueryWithErrorHandling } from './baseQueryWithError.ts'
+import { MoviesResponseSchema, type MoviesTypes } from './schema/movies.schema.ts'
+import { validate } from './validate/validate.ts'
 
 export const api = createApi({
   reducerPath: 'tmdbApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.themoviedb.org/3/',
-    // credentials: 'include',
-    prepareHeaders: (headers) => {
-      headers.set('Authorization', `Bearer ${apiKey}`)
-      return headers
-    },
-  }),
-
+  baseQuery: baseQueryWithErrorHandling,
   tagTypes: [
     'PopularMovies',
     'UpcomingMovies',
@@ -33,18 +26,23 @@ export const api = createApi({
     getPopularMovies: builder.query<MoviesTypes, void>({
       query: () => 'movie/popular',
       providesTags: ['PopularMovies'],
+      transformResponse: validate(MoviesResponseSchema),
     }),
+    // =========
     getUpcomingMovies: builder.query<MoviesTypes, void>({
       query: () => 'movie/upcoming',
       providesTags: ['UpcomingMovies'],
+      transformResponse: validate(MoviesResponseSchema),
     }),
     getNowPlayingMovies: builder.query<MoviesTypes, void>({
       query: () => 'movie/now_playing',
       providesTags: ['NowPlayingMovies'],
+      transformResponse: validate(MoviesResponseSchema),
     }),
     getTopRatedMovies: builder.query<MoviesTypes, void>({
       query: () => 'movie/top_rated',
       providesTags: ['TopRatedMovies'],
+      transformResponse: validate(MoviesResponseSchema),
     }),
     getMovieDetails: builder.query<MovieDetailsType, number>({
       query: (movie_id) => `movie/${movie_id}`,
@@ -71,7 +69,6 @@ export const api = createApi({
       query: () => 'genre/movie/list',
       providesTags: ['GenresMovies'],
     }),
-    // ===========================
     getFilteredMovies: builder.query<
       MoviesTypes,
       { genres: GenreMovie[]; vote_average: VoteAverage; sortValue: string }

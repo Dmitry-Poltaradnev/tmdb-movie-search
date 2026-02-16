@@ -2,8 +2,8 @@ import { MovieCard } from '../MovieCard/MovieCard.tsx'
 import s from './MovieSection.module.css'
 import { Link } from 'react-router-dom'
 import type { CategoryType } from '../../pages/MovieCategoryPage/MovieCategoryPage.tsx'
-import type { MovieType } from '../../../favorites/favoritesSlices.ts'
 import { MoviesCardSkeleton } from '../../../../Components/ui/Skeletons/MovierCardSkeleton/MoviesCardSkeleton.tsx'
+import type { MovieTypes } from '../../../../api/schema/movies.schema.ts'
 
 type Dates = {
   maximum: string
@@ -13,7 +13,7 @@ type Dates = {
 export type MoviesTypes = {
   dates: Dates
   page: number
-  results: MovieType[]
+  results: MovieTypes[]
   total_pages: number
   total_results: number
 }
@@ -41,7 +41,7 @@ export const MovieSection = ({ query, title, category, fullSection }: MovieSecti
       <div className={s.movieCardsWrapper}>
         {showSkeleton
           ? [...Array(6)].map((_, i) => <MoviesCardSkeleton key={i} />)
-          : data.results.map((item: MovieType, index: number) => {
+          : data.results.map((item: MovieTypes, index: number) => {
               if (!fullSection) {
                 if (index < 6) {
                   return <MovieCard key={item.id} movie={item} isFavorite={false} />
