@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleTheme } from '../../../features/slices/theme/themeSlices.ts'
 import type { RootState } from '../../../app/store.ts'
-import { Button } from '../../ui/Button/Button.tsx'
+import { MoonIcon } from '../../../assets/icons/MoonIcon.tsx'
+import { SunIcon } from '../../../assets/icons/SunIcon.tsx'
 
 export const Header = () => {
   const dispatch = useDispatch()
@@ -18,17 +19,23 @@ export const Header = () => {
     { title: 'Favorites', path: '/favorite/movies' },
   ]
 
+  const handleToggleTheme = () => {
+    dispatch(toggleTheme())
+  }
+
   return (
     <div className={s.header}>
-      <Logo />
-      <ul>
+      <Logo width={'160'} height={'60'} />
+      <ul className={s.menuList}>
         {menu.map((item) => (
-          <li key={item.title}>
+          <li className={theme === 'light' ? s.menuItemLight : s.menuItemDark} key={item.title}>
             <Link to={item.path}>{item.title}</Link>
           </li>
         ))}
       </ul>
-      <Button title={`Change Theme : ${theme}`} callBack={() => dispatch(toggleTheme())} />
+      <div onClick={handleToggleTheme} className={s.toggleThemeWrap}>
+        {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+      </div>
     </div>
   )
 }

@@ -1,11 +1,17 @@
-export const Logo = () => {
+type LogoPropsType = {
+  width: string
+  height: string
+}
+
+export const Logo = ({ width, height }: LogoPropsType) => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 273.42 35.52"
       role="img"
       aria-label="The Movie Database"
       className="_logo_m7zbe_18"
+      width={width}
+      height={height}
     >
       <defs>
         <linearGradient
