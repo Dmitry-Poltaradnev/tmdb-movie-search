@@ -3,20 +3,7 @@ import s from './MovieSection.module.css'
 import { Link } from 'react-router-dom'
 import type { CategoryType } from '../../pages/MovieCategoryPage/MovieCategoryPage.tsx'
 import { MoviesCardSkeleton } from '../../../../Components/ui/Skeletons/MovierCardSkeleton/MoviesCardSkeleton.tsx'
-import type { MovieTypes } from '../../../../api/schema/movies.schema.ts'
-
-type Dates = {
-  maximum: string
-  minimum: string
-}
-
-export type MoviesTypes = {
-  dates: Dates
-  page: number
-  results: MovieTypes[]
-  total_pages: number
-  total_results: number
-}
+import type { MoviesTypes, MovieTypes } from '../../../../api/schema/movies.schema.ts'
 
 type MovieSectionPropsType = {
   query: {

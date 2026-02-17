@@ -11,35 +11,8 @@ import { MovieCard } from '../MovieCard/MovieCard.tsx'
 import { Button } from '../../../../Components/ui/Button/Button.tsx'
 import { MoviePageSkeleton } from '../../../../Components/ui/Skeletons/MoviePageSkeleton/MoviePageSkeleton.tsx'
 import type { MovieTypes } from '../../../../api/schema/movies.schema.ts'
-
-export type GenreType = {
-  id: number
-  name: string
-}
-export type ActorType = {
-  adult: boolean
-  cast_id: number
-  character: string
-  credit_id: string
-  gender: number
-  id: number
-  known_for_department: string
-  name: string
-  order: number
-  original_name: string
-  popularity: number
-  profile_path: string
-}
-
-export type MovieDetailsType = {
-  backdrop_path: string
-  genres: GenreType[]
-  overview: string
-  runtime: number
-  title: string
-  vote_average: number
-  release_date: string
-}
+import type { ActorType } from '../../../../api/schema/actor.schema.ts'
+import type { GenreType } from '../../../../api/schema/genre.schema.ts'
 
 export const MoviePage = () => {
   const { id } = useParams<{ id: string }>()

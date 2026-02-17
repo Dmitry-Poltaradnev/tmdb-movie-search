@@ -1,10 +1,15 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import type { MovieDetailsType } from '../features/movies/components/MoviePage/MoviePage.tsx'
 import type { MovieCastType } from '../features/movies/components/ActorCard/ActorCard.tsx'
-import type { GenreMovie, GenresResponse, VoteAverage } from '../types/types.ts'
+import type { VoteAverage } from '../types/types.ts'
 import { baseQueryWithErrorHandling } from './baseQueryWithError.ts'
 import { MoviesResponseSchema, type MoviesTypes } from './schema/movies.schema.ts'
 import { validate } from './validate/validate.ts'
+import { MovieDetailsSchema, type MovieDetailsType } from './schema/movieDetails.schema.ts'
+import {
+  GenreResponseSchema,
+  type GenreResponseType,
+  type GenreType,
+} from './schema/genre.schema.ts'
 
 export const api = createApi({
   reducerPath: 'tmdbApi',
@@ -28,7 +33,6 @@ export const api = createApi({
       providesTags: ['PopularMovies'],
       transformResponse: validate(MoviesResponseSchema),
     }),
-    // =========
     getUpcomingMovies: builder.query<MoviesTypes, void>({
       query: () => 'movie/upcoming',
       providesTags: ['UpcomingMovies'],
@@ -47,6 +51,7 @@ export const api = createApi({
     getMovieDetails: builder.query<MovieDetailsType, number>({
       query: (movie_id) => `movie/${movie_id}`,
       providesTags: ['MovieDetails'],
+      transformResponse: validate(MovieDetailsSchema),
     }),
     getMovieActors: builder.query<MovieCastType, number>({
       query: (movie_id) => `movie/${movie_id}/credits`,
@@ -55,6 +60,7 @@ export const api = createApi({
     getSimilarMovies: builder.query<MoviesTypes, number>({
       query: (movie_id) => `movie/${movie_id}/similar`,
       providesTags: ['SimilarMovies'],
+      transformResponse: validate(MoviesResponseSchema),
     }),
     getMoviesByTitle: builder.query<MoviesTypes, string>({
       query: (title) => ({
@@ -64,25 +70,28 @@ export const api = createApi({
         },
       }),
       providesTags: ['MoviesByTitle'],
+      transformResponse: validate(MoviesResponseSchema),
     }),
-    getGenresMovies: builder.query<GenresResponse, void>({
+    getGenresMovies: builder.query<GenreResponseType, void>({
       query: () => 'genre/movie/list',
       providesTags: ['GenresMovies'],
+      transformResponse: validate(GenreResponseSchema),
     }),
     getFilteredMovies: builder.query<
       MoviesTypes,
-      { genres: GenreMovie[]; vote_average: VoteAverage; sortValue: string }
+      { genres: GenreType[]; vote_average: VoteAverage; sortValue: string }
     >({
       query: ({ genres, vote_average, sortValue }) => ({
         url: 'discover/movie',
         params: {
-          with_genres: genres.map((i: GenreMovie) => i.id).join(','),
+          with_genres: genres.map((i) => i.id).join(','),
           'vote_average.gte': vote_average[0] / 10,
           'vote_average.lte': vote_average[1] / 10,
           sort_by: sortValue,
         },
       }),
       providesTags: ['FilteredMovies'],
+      transformResponse: validate(MoviesResponseSchema),
     }),
   }),
 })

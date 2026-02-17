@@ -5,12 +5,13 @@ import {
   useGetGenresMoviesQuery,
   useGetPopularMoviesQuery,
 } from '../../../../api/tmdbApi.ts'
-import type { GenreMovie, SortValueType } from '../../../../types/types.ts'
+import type { SortValueType } from '../../../../types/types.ts'
 import { useState } from 'react'
 import { RangeSlider } from './inputRating/InputRating.tsx'
 import { useDebounceRating } from './debounce/debounceRating.ts'
 import { Button } from '../../../../Components/ui/Button/Button.tsx'
 import DropDown from '../../components/DropDown/DropDown.tsx'
+import type { GenreType } from '../../../../api/schema/genre.schema.ts'
 
 const sortValues: SortValueType[] = [
   { sortOption: 'original_title.asc', title: 'Title A-Z' },
@@ -24,7 +25,7 @@ const sortValues: SortValueType[] = [
 ]
 
 export const FilterMoviesPage = () => {
-  const [selectedGenres, setSelectedGenres] = useState<GenreMovie[]>([])
+  const [selectedGenres, setSelectedGenres] = useState<GenreType[]>([])
   const [voteAverage, setVoteAverage] = useState<number[]>([0, 100])
   const [sort, setSort] = useState<SortValueType>(sortValues[0])
 
@@ -53,7 +54,7 @@ export const FilterMoviesPage = () => {
 
   const moviesQuery = isFiltered ? filteredQuery : popularQuery
 
-  const selectGenre = (genre: GenreMovie) => {
+  const selectGenre = (genre: GenreType) => {
     setSelectedGenres((prev) => {
       const exists = prev.some((item) => item.id === genre.id)
       return exists ? prev.filter((item) => item.id !== genre.id) : [...prev, genre]
@@ -76,7 +77,7 @@ export const FilterMoviesPage = () => {
 
           {genresQuery.data?.genres?.length ? (
             <ul className={s.genresList}>
-              {genresQuery.data.genres.map((genre: GenreMovie) => (
+              {genresQuery.data.genres.map((genre: GenreType) => (
                 <li key={genre.id} className={s.genresItem}>
                   <Button
                     title={genre.name}

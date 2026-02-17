@@ -1,5 +1,5 @@
 import s from './ActorCard.module.css'
-import type { ActorType } from '../MoviePage/MoviePage.tsx'
+import type { ActorType } from '../../../../api/schema/actor.schema.ts'
 
 type ActorCardProps = {
   actor: ActorType
