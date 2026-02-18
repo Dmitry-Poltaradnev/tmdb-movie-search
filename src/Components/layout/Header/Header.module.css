@@ -1,66 +1,67 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
 .toggleThemeWrap {
-    background-color: white;
-    cursor: pointer;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    border: 2px #65cae1 solid;
-    transition: ease-in-out 0.3s;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border: 2px #65cae1 solid;
+  transition: ease-in-out 0.3s;
 }
 
 .toggleThemeWrap:hover {
-    background-color: #65cae1;
-    border: 2px white solid;
+  background-color: #65cae1;
+  border: 2px white solid;
 }
 
 .menuList {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
 }
 
-.menuItemLight a, .menuItemDark a {
-    transition: ease-in-out 0.2s;
+.menuItemLight a,
+.menuItemDark a {
+  transition: ease-in-out 0.2s;
 }
 
 .menuItemLight a {
-    color: black;
+  color: black;
 }
 
 .menuItemLight a:hover {
-    color: #65cae1;
+  color: #65cae1;
 }
 
 .menuItemDark a {
-    color: white;
+  color: white;
 }
 
 .menuItemDark a:hover {
-    color: #65cae1;
+  color: #65cae1;
 }
 
 @media (max-width: 780px) {
-    .menuList {
-        flex-direction: column;
-    }
+  .menuList {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 470px) {
-    .header {
-        flex-direction: column;
-        gap: 20px;
-    }
+  .header {
+    flex-direction: column;
+    gap: 20px;
+  }
 }

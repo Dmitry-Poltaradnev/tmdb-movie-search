@@ -25,7 +25,9 @@ export const Header = () => {
 
   return (
     <div className={s.header}>
-      <Logo width={'160'} height={'60'} />
+      <Link to={menu[0].path}>
+        <Logo width={'160'} height={'60'} />
+      </Link>
       <ul className={s.menuList}>
         {menu.map((item) => (
           <li className={theme === 'light' ? s.menuItemLight : s.menuItemDark} key={item.title}>

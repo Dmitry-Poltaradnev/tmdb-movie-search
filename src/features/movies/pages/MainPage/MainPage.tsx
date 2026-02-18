@@ -32,7 +32,7 @@ export const MainPage = () => {
       {isLoading || !data ? (
         <WelcomeSectionSkeleton />
       ) : (
-        <WelcomeSection picture={`https://image.tmdb.org/t/p/w500${backdropPath}`} />
+        <WelcomeSection picture={`https://image.tmdb.org/t/p/w1280${backdropPath}`} />
       )}
       <MovieSection
         title={'Popular Movie'}

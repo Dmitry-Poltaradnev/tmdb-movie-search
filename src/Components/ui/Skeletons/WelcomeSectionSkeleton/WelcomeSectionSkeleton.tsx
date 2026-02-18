@@ -6,7 +6,7 @@ export const WelcomeSectionSkeleton = () => {
     <Skeleton
       className={s.welSecSkeleton}
       variant="rectangular"
-      height={700}
+      height={500}
       sx={{ bgcolor: '#989696' }}
     />
   )

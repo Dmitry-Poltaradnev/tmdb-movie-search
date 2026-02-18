@@ -34,7 +34,12 @@ export const SearchMovieBlock = () => {
         />
         <CrossBtn isDisable={checkDisable()} removeVal={() => setInputVal('')} />
       </div>
-      <Button title={'Search'} callBack={searchMovie} isDisabled={checkDisable()} />
+      <Button
+        classNames={s.searchBtn}
+        title={'Search'}
+        callBack={searchMovie}
+        isDisabled={checkDisable()}
+      />
     </div>
   )
 }
