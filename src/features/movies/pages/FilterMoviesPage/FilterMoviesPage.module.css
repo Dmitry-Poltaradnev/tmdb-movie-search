@@ -2,49 +2,69 @@
 }
 
 .genresList {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .genresItem {
 }
 
 .nonActiveGenre {
-  border: 1px solid black;
-  background: white;
-  border-radius: 10px;
-  color: black;
-  cursor: pointer;
-  transition: 0.3s ease;
+    border: 1px solid black;
+    background: white;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
 .nonActiveGenre:hover {
-  background: gray;
-  color: white;
-  border: 1px solid gray;
+    background: gray;
+    color: white;
+    border: 1px solid gray;
 }
 
 .activeGenre {
-  background: black;
-  color: white;
-  border: 1px solid black;
+    background: black;
+    color: white;
+    border: 1px solid black;
 }
 
 .filterOptionsWrapper {
-  background: #c8c4c4;
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-height: 600px;
+    background: #c8c4c4;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 600px;
 }
 
 .contentWrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+@media (max-width: 1035px) {
+    .contentWrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filterOptionsWrapper {
+        max-width: 440px;
+    }
+}
+
+@media (max-width: 400px) {
+    .filterOptionsWrapper {
+        max-height: 650px;
+    }
 }

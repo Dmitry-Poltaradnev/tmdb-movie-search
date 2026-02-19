@@ -13,13 +13,12 @@ export const SearchMoviePage = () => {
   })
 
   return (
-    <section className={s.SearchMoviePage}>
-      <h3>Search Movie Page</h3>
+    <section className={s.searchMoviePage}>
       <SearchMovieBlock />
-      {movies ? (
+      {title && movies.data?.results.length !== 0 ? (
         <MovieSection fullSection={true} query={movies} title={'All Movies with name...'} />
       ) : (
-        <div>Try to search movie</div>
+        <p className={s.description}>Enter movie title</p>
       )}
     </section>
   )

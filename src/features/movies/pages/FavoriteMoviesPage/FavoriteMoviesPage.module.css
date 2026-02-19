@@ -1,2 +1,15 @@
-.FavoriteMoviesPage {
+.favoriteMoviesPage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.description {
+    font-size: 24px;
+    font-weight: bold;
+    border: 3px solid #65cae1;
+    padding: 10px 15px;
+    border-radius: 10px;
 }

@@ -1,4 +1,5 @@
 import s from './MovieCategoryPage.module.css'
+import d from '../../../../Components/layout/Header/Header.module.css'
 import {
   useGetNowPlayingMoviesQuery,
   useGetPopularMoviesQuery,
@@ -6,11 +7,14 @@ import {
   useGetUpcomingMoviesQuery,
 } from '../../../../api/tmdbApi.ts'
 import { MovieSection } from '../../components/MovieSection/MovieSection.tsx'
-import { Link, useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import type { RootState } from '../../../../app/store.ts'
 
 export type CategoryType = 'popular' | 'top_rated' | 'now_playing' | 'upcoming'
 
 export const MovieCategoryPage = () => {
+  const theme = useSelector((state: RootState) => state.theme.theme)
   const { category } = useParams<{ category: CategoryType }>()
 
   const popularQuery = useGetPopularMoviesQuery()
@@ -20,19 +24,19 @@ export const MovieCategoryPage = () => {
 
   const categories = {
     popular: {
-      title: 'Popular Movies',
+      title: 'Popular',
       query: popularQuery,
     },
     upcoming: {
-      title: 'Upcoming Movies',
+      title: 'Upcoming',
       query: upcomingQuery,
     },
     now_playing: {
-      title: 'Now Playing Movies',
+      title: 'Now Playing',
       query: nowPlayingQuery,
     },
     top_rated: {
-      title: 'Top Rated Movies',
+      title: 'Top Rated',
       query: topRatedQuery,
     },
   }
@@ -41,13 +45,21 @@ export const MovieCategoryPage = () => {
     category && categories[category] ? categories[category] : categories.popular
 
   return (
-    <section className={s.MovieCategoryPage}>
-      <h3>Movie Category page: {category ?? 'popular'}</h3>
-
-      <ul>
+    <section className={s.movieCategoryPage}>
+      <ul className={s.categoryList}>
         {Object.entries(categories).map(([key, value]) => (
-          <li key={key}>
-            <Link to={`/movie/category/${key}`}>{value.title}</Link>
+          <li className={d.menuItem} key={key}>
+            <NavLink
+              className={({ isActive }) =>
+                `
+          ${theme === 'light' ? d.menuItemLight : d.menuItemDark}
+          ${isActive ? d.menuItemActive : ''}
+          `
+              }
+              to={`/movie/category/${key}`}
+            >
+              {value.title}
+            </NavLink>
           </li>
         ))}
       </ul>

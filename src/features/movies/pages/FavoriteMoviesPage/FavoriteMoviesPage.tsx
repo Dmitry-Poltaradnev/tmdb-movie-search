@@ -7,9 +7,8 @@ import type { MovieTypes } from '../../../../api/schema/movies.schema.ts'
 export const FavoriteMoviesPage = () => {
   const movies = useSelector((state: RootState) => state.favoriteMovies)
   return (
-    <section className={s.FavoriteMoviesPage}>
-      <h3>Favorite Movies Page</h3>
-      {!movies.length && <p>Empty favorite list</p>}
+    <section className={s.favoriteMoviesPage}>
+      {!movies.length && <p className={s.description}>Favorite movies list is empty</p>}
       {movies.map((movie: MovieTypes) => (
         <MovieCard key={movie.id} movie={movie} isFavorite />
       ))}

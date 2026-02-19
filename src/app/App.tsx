@@ -16,12 +16,16 @@ function App() {
   }, [theme])
 
   return (
-    <>
+    <div className="layout">
       <Header />
-      <Outlet />
+
+      <main className="content">
+        <Outlet />
+      </main>
+
       <Footer />
       <ErrorSnackBar />
-    </>
+    </div>
   )
 }
 

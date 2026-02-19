@@ -33,22 +33,26 @@ export const MovieCard = ({ movie, isFavorite }: MovieCardPropsType) => {
           }
           alt="movieImg"
         />
-        <p>Title: {movie.title}</p>
-        <p>Rate: {movie.vote_average.toFixed(1)}</p>
       </div>
-      {isFavorite ? (
-        <Button
-          classNames={s.cardBtn}
-          title={'Remove from favorites'}
-          callBack={() => dispatch(removeMovie(movie))}
-        />
-      ) : (
-        <Button
-          classNames={s.cardBtn}
-          title={'Add to favorites'}
-          callBack={() => dispatch(addMovie(movie))}
-        />
-      )}
+      <div className={s.cardContent}>
+        <p className={s.movieTitle} onClick={handleClick}>
+          {movie.title}
+        </p>
+        <p>Rate: {movie.vote_average.toFixed(1)}</p>
+        {isFavorite ? (
+          <Button
+            classNames={s.cardBtn}
+            title={'Remove from favorites'}
+            callBack={() => dispatch(removeMovie(movie))}
+          />
+        ) : (
+          <Button
+            classNames={s.cardBtn}
+            title={'Add to favorites'}
+            callBack={() => dispatch(addMovie(movie))}
+          />
+        )}
+      </div>
     </div>
   )
 }

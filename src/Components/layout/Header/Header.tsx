@@ -1,6 +1,6 @@
 import { Logo } from '../../../assets/icons/Logo.tsx'
 import s from './Header.module.css'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleTheme } from '../../../features/slices/theme/themeSlices.ts'
 import type { RootState } from '../../../app/store.ts'
@@ -30,8 +30,18 @@ export const Header = () => {
       </Link>
       <ul className={s.menuList}>
         {menu.map((item) => (
-          <li className={theme === 'light' ? s.menuItemLight : s.menuItemDark} key={item.title}>
-            <Link to={item.path}>{item.title}</Link>
+          <li className={s.menuItem} key={item.title}>
+            <NavLink
+              to={item.path}
+              className={({ isActive }) =>
+                `
+          ${theme === 'light' ? s.menuItemLight : s.menuItemDark}
+          ${isActive ? s.menuItemActive : ''}
+          `
+              }
+            >
+              {item.title}
+            </NavLink>
           </li>
         ))}
       </ul>

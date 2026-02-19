@@ -69,8 +69,6 @@ export const FilterMoviesPage = () => {
 
   return (
     <section className={s.filterMoviesPage}>
-      <h3>Filtered Movies</h3>
-
       <div className={s.contentWrapper}>
         <div className={s.filterOptionsWrapper}>
           <DropDown values={sortValues} onChange={setSort} value={sort} />

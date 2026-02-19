@@ -1,2 +1,14 @@
-.SearchMoviePage {
+.searchMoviePage {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.description {
+    font-size: 24px;
+    font-weight: bold;
+    border: 3px solid #65cae1;
+    padding: 10px 15px;
+    border-radius: 10px;
 }
