@@ -29,6 +29,10 @@ export const FilterMoviesPage = () => {
   const [voteAverage, setVoteAverage] = useState<number[]>([0, 100])
   const [sort, setSort] = useState<SortValueType>(sortValues[0])
 
+  console.log(selectedGenres)
+  console.log(voteAverage)
+  console.log(sort)
+
   const debouncedVoteAverage = useDebounceRating(voteAverage, 300)
 
   const isFiltered =

@@ -32,33 +32,46 @@ export const MoviePage = () => {
   }
   return (
     <div className={s.moviePage}>
-      <img
-        className={s.moviePoster}
-        src={
-          backdrop_path
-            ? `https://image.tmdb.org/t/p/w500${backdrop_path}`
-            : 'https://placehold.co/400x300'
-        }
-        alt="Movie Poster"
-      />
-      <h4>Title: {title}</h4>
-      <p>Release data: {release_date}</p>
-      <p>Rating: {vote_average}</p>
-      <ul className={s.genresList}>
-        Genres:
-        {genres?.map((item: GenreType) => (
-          <li key={item.id}> {item.name} </li>
-        ))}
-      </ul>
-      <ul className={s.actorsList}>
-        {people?.cast.map((actor: ActorType, i: number) =>
-          i < 6 ? <ActorCard key={actor.id} actor={actor} /> : null
-        )}
-      </ul>
-      <p>Movie duration: {runtime} m</p>
-      <p>Description: {overview}</p>
+      <div className={s.movieInfoWrap}>
+        <img
+          className={s.moviePoster}
+          src={
+            backdrop_path
+              ? `https://image.tmdb.org/t/p/w500${backdrop_path}`
+              : 'https://placehold.co/400x300?text=No+Photo'
+          }
+          alt="Movie Poster"
+        />
+        <div className={s.movieInfo}>
+          <p className={s.movieTitle}>Title: {title}</p>
+          <div className={s.desc}>
+            <p>Release data: {release_date}</p>
+            <p>Movie duration: {runtime} m</p>
+            <p>Rating: {vote_average?.toFixed(1)}</p>
+          </div>
+          <div className={s.genresWrap}>
+            <p className={s.blockTitle}>Genres:</p>
+            <ul className={s.genresList}>
+              {genres?.map((item: GenreType) => (
+                <li className={s.genre} key={item.id}>
+                  {item.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p>{overview}</p>
+        </div>
+      </div>
+      <div className={s.actorsWrap}>
+        <p className={`${s.blockTitle} ${s.secondTitle}`}>Actors</p>
+        <ul className={s.actorsList}>
+          {people?.cast.map((actor: ActorType, i: number) =>
+            i < 6 ? <ActorCard key={actor.id} actor={actor} /> : null
+          )}
+        </ul>
+      </div>
       <div>
-        <p>Similar movies:</p>
+        <p className={`${s.blockTitle} ${s.secondTitle}`}>Similar movies</p>
         <div>
           {!similarMovies ? (
             <p>We don't have similar movies</p>
@@ -71,7 +84,7 @@ export const MoviePage = () => {
           )}
         </div>
       </div>
-      <Button title={'Back'} callBack={() => navigate(-1)} />
+      <Button classNames={s.returnBtn} title={'Back'} callBack={() => navigate(-1)} />
     </div>
   )
 }

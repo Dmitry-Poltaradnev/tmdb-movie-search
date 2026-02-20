@@ -2,8 +2,8 @@ export const MoonIcon = () => {
   return (
     <svg
       fill="#000000"
-      height="50px"
-      width="50px"
+      height="25px"
+      width="25px"
       version="1.1"
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"

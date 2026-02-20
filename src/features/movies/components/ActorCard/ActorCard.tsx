@@ -19,12 +19,12 @@ export const ActorCard = (actor: ActorCardProps) => {
         src={
           profile_path
             ? `https://image.tmdb.org/t/p/w500${profile_path}`
-            : 'https://placehold.co/160x160'
+            : 'https://placehold.co/140x140?text=No+Photo'
         }
         alt="actorPhoto"
       />
-      <p>Actor name: {name}</p>
-      <p>Character name: {character}</p>
+      <p className={s.actorName}>{name}</p>
+      <p>{character}</p>
     </li>
   )
 }

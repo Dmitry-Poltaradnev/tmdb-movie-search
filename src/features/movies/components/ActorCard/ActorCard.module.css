@@ -1,13 +1,22 @@
 .actorCard {
-  list-style: none;
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 10px;
+    list-style: none;
+    border: 3px solid #65cae1;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    max-width: 170px;
+    gap: 10px;
 }
 
 .actorPhoto {
-  border-radius: 50%;
-  height: 160px;
-  width: 160px;
-  object-fit: cover;
+    border-radius: 50%;
+    height: 140px;
+    width: 140px;
+    object-fit: cover;
+}
+
+.actorName {
+    font-weight: bold;
 }

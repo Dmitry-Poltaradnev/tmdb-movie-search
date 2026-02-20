@@ -1,6 +1,6 @@
 export const SunIcon = () => {
   return (
-    <svg width="50px" height="50px" viewBox="0 0 512 512">
+    <svg width="25px" height="25px" viewBox="0 0 512 512">
       <g>
         <path
           d="M256,118.125c-76.156,0-137.875,61.719-137.875,137.875S179.844,393.875,256,393.875
