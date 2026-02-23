@@ -28,8 +28,8 @@ export const MovieCard = ({ movie, favoritesMovies }: MovieCardPropsType) => {
         <img
           className={s.movieImg}
           src={
-            movie.backdrop_path
-              ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
               : 'https://placehold.co/160x160?text=No+Photo'
           }
           alt="movieImg"

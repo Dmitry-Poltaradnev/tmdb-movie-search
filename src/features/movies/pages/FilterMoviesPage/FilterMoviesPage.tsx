@@ -14,14 +14,14 @@ import DropDown from '../../components/DropDown/DropDown.tsx'
 import type { GenreType } from '../../../../api/schema/genre.schema.ts'
 
 const sortValues: SortValueType[] = [
-  { sortOption: 'original_title.asc', title: 'Title A-Z' },
-  { sortOption: 'original_title.desc', title: 'Title Z-A' },
-  { sortOption: 'popularity.asc', title: 'Popularity from min to max' },
   { sortOption: 'popularity.desc', title: 'Popularity max to min' },
-  { sortOption: 'primary_release_date.asc', title: 'Release date earlier' },
-  { sortOption: 'primary_release_date.desc', title: 'Release date later' },
-  { sortOption: 'vote_average.asc', title: 'Vote average min to max' },
+  { sortOption: 'popularity.asc', title: 'Popularity from min to max' },
   { sortOption: 'vote_average.desc', title: 'Vote average max to min' },
+  { sortOption: 'vote_average.asc', title: 'Vote average min to max' },
+  { sortOption: 'primary_release_date.desc', title: 'Release date later' },
+  { sortOption: 'primary_release_date.asc', title: 'Release date earlier' },
+  { sortOption: 'original_title.desc', title: 'Title Z-A' },
+  { sortOption: 'original_title.asc', title: 'Title A-Z' },
 ]
 
 export const FilterMoviesPage = () => {
