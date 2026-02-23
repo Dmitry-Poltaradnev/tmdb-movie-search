@@ -22,6 +22,7 @@ export const MovieSection = ({ query, title, category, fullSection }: MovieSecti
   const { data, isLoading, isFetching } = query
 
   const theme = useSelector((state: RootState) => state.theme.theme)
+  const favoritesMovies = useSelector((state: RootState) => state.favoriteMovies)
 
   const showSkeleton = isLoading || isFetching || !data
 
@@ -35,10 +36,10 @@ export const MovieSection = ({ query, title, category, fullSection }: MovieSecti
           : data.results.map((item: MovieTypes, index: number) => {
               if (!fullSection) {
                 if (index < 6) {
-                  return <MovieCard key={item.id} movie={item} isFavorite={false} />
+                  return <MovieCard key={item.id} movie={item} favoritesMovies={favoritesMovies} />
                 }
               } else {
-                return <MovieCard key={item.id} movie={item} isFavorite={false} />
+                return <MovieCard key={item.id} movie={item} favoritesMovies={favoritesMovies} />
               }
             })}
       </div>

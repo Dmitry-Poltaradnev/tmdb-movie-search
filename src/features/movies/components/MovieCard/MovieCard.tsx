@@ -8,14 +8,15 @@ import type { MovieTypes } from '../../../../api/schema/movies.schema.ts'
 
 type MovieCardPropsType = {
   movie: MovieTypes
-  isFavorite: boolean
+  favoritesMovies: MovieTypes[]
 }
 
 console.log(store.getState())
 
-export const MovieCard = ({ movie, isFavorite }: MovieCardPropsType) => {
-  const dispatch = useDispatch()
+export const MovieCard = ({ movie, favoritesMovies }: MovieCardPropsType) => {
+  const isFavorite = favoritesMovies?.some((item) => item.id === movie.id)
 
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleClick = () => {

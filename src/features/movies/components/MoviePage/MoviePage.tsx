@@ -13,8 +13,12 @@ import { MoviePageSkeleton } from '../../../../Components/ui/Skeletons/MoviePage
 import type { MovieTypes } from '../../../../api/schema/movies.schema.ts'
 import type { ActorType } from '../../../../api/schema/actor.schema.ts'
 import type { GenreType } from '../../../../api/schema/genre.schema.ts'
+import { useSelector } from 'react-redux'
+import type { RootState } from '../../../../app/store.ts'
 
 export const MoviePage = () => {
+  const favoritesMovies = useSelector((state: RootState) => state.favoriteMovies)
+
   const { id } = useParams<{ id: string }>()
   const movieId = id ? Number(id) : 0
 
@@ -78,7 +82,9 @@ export const MoviePage = () => {
           ) : (
             <ul className={s.similarMoviesWrap}>
               {similarMovies.results.map((movie: MovieTypes, i: number) =>
-                i < 6 ? <MovieCard key={movie.id} movie={movie} isFavorite={false} /> : null
+                i < 6 ? (
+                  <MovieCard key={movie.id} movie={movie} favoritesMovies={favoritesMovies} />
+                ) : null
               )}
             </ul>
           )}

@@ -9,7 +9,6 @@ type WelcomeSectionProps = {
 
 export const WelcomeSection = ({ picture }: WelcomeSectionProps) => {
   const theme = useSelector((state: RootState) => state.theme.theme)
-  console.log(theme)
   return (
     <div
       className={s.welcomeSection}
