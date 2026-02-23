@@ -6,12 +6,13 @@ import {
   useGetPopularMoviesQuery,
 } from '../../../../api/tmdbApi.ts'
 import type { SortValueType } from '../../../../types/types.ts'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RangeSlider } from './inputRating/InputRating.tsx'
 import { useDebounceRating } from './debounce/debounceRating.ts'
 import { Button } from '../../../../Components/ui/Button/Button.tsx'
 import DropDown from '../../components/DropDown/DropDown.tsx'
 import type { GenreType } from '../../../../api/schema/genre.schema.ts'
+import PaginationButtons from '../../../../Components/ui/Pagination/Pagination.tsx'
 
 const sortValues: SortValueType[] = [
   { sortOption: 'popularity.desc', title: 'Popularity max to min' },
@@ -28,12 +29,13 @@ export const FilterMoviesPage = () => {
   const [selectedGenres, setSelectedGenres] = useState<GenreType[]>([])
   const [voteAverage, setVoteAverage] = useState<number[]>([0, 100])
   const [sort, setSort] = useState<SortValueType>(sortValues[0])
-
-  console.log(selectedGenres)
-  console.log(voteAverage)
-  console.log(sort)
+  const [page, setPage] = useState(1)
 
   const debouncedVoteAverage = useDebounceRating(voteAverage, 300)
+
+  useEffect(() => {
+    setPage(1)
+  }, [selectedGenres, debouncedVoteAverage, sort])
 
   const isFiltered =
     selectedGenres.length > 0 ||
@@ -46,17 +48,17 @@ export const FilterMoviesPage = () => {
       genres: selectedGenres,
       vote_average: debouncedVoteAverage,
       sortValue: sort.sortOption,
+      page: page,
     },
     { skip: !isFiltered }
   )
-
   const popularQuery = useGetPopularMoviesQuery(undefined, {
     skip: isFiltered,
   })
+  const moviesQuery = isFiltered ? filteredQuery : popularQuery
+  const totalPages = Math.min(moviesQuery?.data?.total_pages ?? 1, 500)
 
   const genresQuery = useGetGenresMoviesQuery()
-
-  const moviesQuery = isFiltered ? filteredQuery : popularQuery
 
   const selectGenre = (genre: GenreType) => {
     setSelectedGenres((prev) => {
@@ -104,6 +106,7 @@ export const FilterMoviesPage = () => {
 
         <MovieSection fullSection={true} query={moviesQuery} />
       </div>
+      <PaginationButtons page={page} onChange={setPage} count={totalPages} />
     </section>
   )
 }

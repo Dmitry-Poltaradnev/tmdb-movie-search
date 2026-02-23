@@ -28,23 +28,43 @@ export const api = createApi({
   ],
 
   endpoints: (builder) => ({
-    getPopularMovies: builder.query<MoviesTypes, void>({
-      query: () => 'movie/popular',
+    getPopularMovies: builder.query<MoviesTypes, number | void>({
+      query: (page = 1) => ({
+        url: 'movie/popular',
+        params: {
+          page,
+        },
+      }),
       providesTags: ['PopularMovies'],
       transformResponse: validate(MoviesResponseSchema),
     }),
-    getUpcomingMovies: builder.query<MoviesTypes, void>({
-      query: () => 'movie/upcoming',
+    getUpcomingMovies: builder.query<MoviesTypes, number | void>({
+      query: (page = 1) => ({
+        url: 'movie/upcoming',
+        params: {
+          page,
+        },
+      }),
       providesTags: ['UpcomingMovies'],
       transformResponse: validate(MoviesResponseSchema),
     }),
-    getNowPlayingMovies: builder.query<MoviesTypes, void>({
-      query: () => 'movie/now_playing',
+    getNowPlayingMovies: builder.query<MoviesTypes, number | void>({
+      query: (page = 1) => ({
+        url: 'movie/now_playing',
+        params: {
+          page,
+        },
+      }),
       providesTags: ['NowPlayingMovies'],
       transformResponse: validate(MoviesResponseSchema),
     }),
-    getTopRatedMovies: builder.query<MoviesTypes, void>({
-      query: () => 'movie/top_rated',
+    getTopRatedMovies: builder.query<MoviesTypes, number | void>({
+      query: (page = 1) => ({
+        url: 'movie/top_rated',
+        params: {
+          page,
+        },
+      }),
       providesTags: ['TopRatedMovies'],
       transformResponse: validate(MoviesResponseSchema),
     }),
@@ -79,15 +99,16 @@ export const api = createApi({
     }),
     getFilteredMovies: builder.query<
       MoviesTypes,
-      { genres: GenreType[]; vote_average: VoteAverage; sortValue: string }
+      { genres: GenreType[]; vote_average: VoteAverage; sortValue: string; page: number | void }
     >({
-      query: ({ genres, vote_average, sortValue }) => ({
+      query: ({ genres, vote_average, sortValue, page = 1 }) => ({
         url: 'discover/movie',
         params: {
           with_genres: genres.map((i) => i.id).join(','),
           'vote_average.gte': vote_average[0] / 10,
           'vote_average.lte': vote_average[1] / 10,
           sort_by: sortValue,
+          page: page,
         },
       }),
       providesTags: ['FilteredMovies'],
