@@ -1,12 +1,14 @@
 import s from './SearchMovieBlock.module.css'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CrossBtn } from '../ui/Cross/CrossBtn.tsx'
 import { Button } from '../ui/Button/Button.tsx'
 import * as React from 'react'
 
 export const SearchMovieBlock = () => {
-  const [inputVal, setInputVal] = useState('')
+  const [searchParams] = useSearchParams()
+  const title = searchParams.get('query') ?? ''
+  const [inputVal, setInputVal] = useState(title)
 
   const navigate = useNavigate()
 
@@ -16,7 +18,6 @@ export const SearchMovieBlock = () => {
     }
   }
   const handleSearchMovie = () => {
-    setInputVal('')
     navigate(`/search/movie?query=${encodeURIComponent(inputVal)}`)
   }
   const changeInputValue = (inputVal: string) => {
@@ -25,6 +26,11 @@ export const SearchMovieBlock = () => {
 
   const checkDisable = () => {
     return inputVal.trim().length === 0
+  }
+
+  const handleReset = () => {
+    setInputVal('')
+    navigate(`/search/movie`)
   }
 
   return (
@@ -38,7 +44,7 @@ export const SearchMovieBlock = () => {
           placeholder="Search Movie"
           onKeyDown={handleKeyDown}
         />
-        <CrossBtn isDisable={checkDisable()} removeVal={() => setInputVal('')} />
+        <CrossBtn isDisable={checkDisable()} removeVal={handleReset} />
       </div>
       <Button
         classNames={s.searchBtn}

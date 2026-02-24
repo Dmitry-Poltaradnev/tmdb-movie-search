@@ -34,6 +34,8 @@ export const SearchMoviePage = () => {
             <PaginationButtons page={page} onChange={setPage} count={totalPages} />
           )}
         </div>
+      ) : title.trim().length > 0 && movies.data?.results.length === 0 ? (
+        <p className={s.description}>No match for the query '{title}'</p>
       ) : (
         <p className={s.description}>Enter movie title</p>
       )}

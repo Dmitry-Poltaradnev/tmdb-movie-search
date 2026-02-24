@@ -18,7 +18,7 @@ export const AppRoutes = () => {
         <Route path="/favorite/movies" element={<FavoriteMoviesPage />} />
         <Route path="/search/movie" element={<SearchMoviePage />} />
         <Route path="/filtered/movies" element={<FilterMoviesPage />} />
-        <Route path="/*" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   )
