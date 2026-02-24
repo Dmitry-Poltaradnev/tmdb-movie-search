@@ -3,20 +3,37 @@ import { SearchMovieBlock } from '../../../../Components/SearchMovieBlock/Search
 import { MovieSection } from '../../components/MovieSection/MovieSection.tsx'
 import { useGetMoviesByTitleQuery } from '../../../../api/tmdbApi.ts'
 import { useSearchParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import PaginationButtons from '../../../../Components/ui/Pagination/Pagination.tsx'
 
 export const SearchMoviePage = () => {
   const [searchParams] = useSearchParams()
   const title = searchParams.get('query') ?? ''
+  const [page, setPage] = useState(1)
 
-  const movies = useGetMoviesByTitleQuery(title, {
-    skip: !title,
-  })
+  const movies = useGetMoviesByTitleQuery(
+    { title, page },
+    {
+      skip: !title,
+    }
+  )
+
+  useEffect(() => {
+    setPage(1)
+  }, [title])
+
+  const totalPages = Math.min(movies?.data?.total_pages ?? 1, 500)
 
   return (
     <section className={s.searchMoviePage}>
       <SearchMovieBlock />
       {title && movies.data?.results.length !== 0 ? (
-        <MovieSection fullSection={true} query={movies} title={'All Movies with name...'} />
+        <div>
+          <MovieSection fullSection={true} query={movies} />
+          {totalPages > 1 && (
+            <PaginationButtons page={page} onChange={setPage} count={totalPages} />
+          )}
+        </div>
       ) : (
         <p className={s.description}>Enter movie title</p>
       )}

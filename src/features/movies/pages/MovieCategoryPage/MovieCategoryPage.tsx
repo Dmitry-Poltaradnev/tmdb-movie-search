@@ -79,11 +79,7 @@ export const MovieCategoryPage = () => {
         fullSection={true}
       />
       <div className={s.paginationWrapper}>
-        {!currentCategory.query ? (
-          <div>...Loading</div>
-        ) : (
-          <PaginationButtons count={totalPages} page={page} onChange={setPage} />
-        )}
+        {totalPages > 1 && <PaginationButtons count={totalPages} page={page} onChange={setPage} />}
       </div>
     </section>
   )

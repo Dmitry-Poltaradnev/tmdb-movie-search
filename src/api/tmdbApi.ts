@@ -82,11 +82,12 @@ export const api = createApi({
       providesTags: ['SimilarMovies'],
       transformResponse: validate(MoviesResponseSchema),
     }),
-    getMoviesByTitle: builder.query<MoviesTypes, string>({
-      query: (title) => ({
+    getMoviesByTitle: builder.query<MoviesTypes, { title: string; page: number }>({
+      query: ({ title, page = 1 }) => ({
         url: 'search/movie',
         params: {
           query: title,
+          page,
         },
       }),
       providesTags: ['MoviesByTitle'],

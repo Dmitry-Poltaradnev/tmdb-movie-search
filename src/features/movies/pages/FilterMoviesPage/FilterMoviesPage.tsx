@@ -29,9 +29,9 @@ export const FilterMoviesPage = () => {
   const [selectedGenres, setSelectedGenres] = useState<GenreType[]>([])
   const [voteAverage, setVoteAverage] = useState<number[]>([0, 100])
   const [sort, setSort] = useState<SortValueType>(sortValues[0])
-  const [page, setPage] = useState(1)
+  const debouncedVoteAverage = useDebounceRating(voteAverage, 400)
 
-  const debouncedVoteAverage = useDebounceRating(voteAverage, 300)
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     setPage(1)
@@ -52,7 +52,7 @@ export const FilterMoviesPage = () => {
     },
     { skip: !isFiltered }
   )
-  const popularQuery = useGetPopularMoviesQuery(undefined, {
+  const popularQuery = useGetPopularMoviesQuery(page, {
     skip: isFiltered,
   })
   const moviesQuery = isFiltered ? filteredQuery : popularQuery
@@ -103,10 +103,13 @@ export const FilterMoviesPage = () => {
 
           <Button title="Reset Filters" callBack={resetFilter} />
         </div>
-
-        <MovieSection fullSection={true} query={moviesQuery} />
+        <div className={s.movieOutputWrap}>
+          <MovieSection fullSection={true} query={moviesQuery} />
+          {totalPages > 1 && (
+            <PaginationButtons page={page} onChange={setPage} count={totalPages} />
+          )}
+        </div>
       </div>
-      <PaginationButtons page={page} onChange={setPage} count={totalPages} />
     </section>
   )
 }
