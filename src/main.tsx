@@ -16,7 +16,8 @@ if (redirect) {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="/tmdb-movie-search/">
+      {/*<BrowserRouter basename="/tmdb-movie-search/"> for gh-pages */}
+      <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
     </Provider>
