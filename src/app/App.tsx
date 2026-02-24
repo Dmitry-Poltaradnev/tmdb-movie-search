@@ -7,25 +7,34 @@ import type { Theme } from '../features/slices/theme/themeSlices.ts'
 import { useEffect } from 'react'
 import type { RootState } from './store.ts'
 import { ErrorSnackBar } from '../Components/ui/ErrorSnackBar/ErrorSnackBar.tsx'
+import { LinearProgress } from '@mui/material'
 
 function App() {
   const theme: Theme = useSelector((state: RootState) => state.theme.theme)
+
+  const isFetching = useSelector((state: RootState) =>
+    Object.values(state.tmdbApi.queries).some((query) => query?.status === 'pending')
+  )
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
   }, [theme])
 
   return (
-    <div className="layout">
-      <Header />
+    <>
+      {isFetching && <LinearProgress sx={{ height: '15px' }} className="globalProgress" />}
 
-      <main className="content">
-        <Outlet />
-      </main>
+      <div className="layout">
+        <Header />
 
-      <Footer />
-      <ErrorSnackBar />
-    </div>
+        <main className="content">
+          <Outlet />
+        </main>
+
+        <Footer />
+        <ErrorSnackBar />
+      </div>
+    </>
   )
 }
 

@@ -34,3 +34,10 @@ body {
     transition: background-color 0.2s ease,
     color 0.2s ease;
 }
+
+.globalProgress {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
