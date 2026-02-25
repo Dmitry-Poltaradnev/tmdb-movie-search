@@ -7,29 +7,22 @@ export const MoviePageSkeleton = () => {
       <Skeleton
         className={s.moviePageSkeletonFirst}
         variant="rectangular"
-        height={150}
-        width={400}
+        height={280}
+        width="90%"
         sx={{ bgcolor: '#989696' }}
       />
       <Skeleton
         className={s.moviePageSkeletonSecond}
         variant="rectangular"
-        height={40}
-        width={400}
+        height={340}
+        width="90%"
         sx={{ bgcolor: '#989696' }}
       />
       <Skeleton
         className={s.moviePageSkeletonFirst}
         variant="rectangular"
-        height={150}
-        width={400}
-        sx={{ bgcolor: '#989696' }}
-      />
-      <Skeleton
-        className={s.moviePageSkeletonSecond}
-        variant="rectangular"
-        height={40}
-        width={400}
+        height={490}
+        width="90%"
         sx={{ bgcolor: '#989696' }}
       />
     </div>
