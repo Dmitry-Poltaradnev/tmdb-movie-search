@@ -1,0 +1,42 @@
+.searchMovieBlock {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+  max-width: 300px;
+}
+
+.searchInput {
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.searchBtn {
+  font-weight: bold;
+  font-size: 15px;
+  padding: 10px;
+  transition: ease-in 0.2s;
+  border: none;
+  outline: none;
+}
+
+.searchBtn:hover {
+  transform: scale(1.2);
+}
+
+.searchBtn:disabled {
+  background-color: gray;
+  transform: scale(1);
+}
+
+@media (max-width: 670px) {
+  .searchMovieBlock {
+    flex-direction: column;
+  }
+}

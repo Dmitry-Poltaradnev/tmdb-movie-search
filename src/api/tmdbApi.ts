@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import type { MovieCastType } from '../features/movies/components/ActorCard/ActorCard.tsx'
+import type { MovieCastType } from '@/ActorCard/ActorCard.tsx'
 import type { VoteAverage } from '../types/types.ts'
 import { baseQueryWithErrorHandling } from './baseQueryWithError.ts'
 import { MoviesResponseSchema, type MoviesTypes } from './schema/movies.schema.ts'
@@ -100,7 +100,12 @@ export const api = createApi({
     }),
     getFilteredMovies: builder.query<
       MoviesTypes,
-      { genres: GenreType[]; vote_average: VoteAverage; sortValue: string; page: number | void }
+      {
+        genres: GenreType[]
+        vote_average: VoteAverage
+        sortValue: string
+        page: number | void
+      }
     >({
       query: ({ genres, vote_average, sortValue, page = 1 }) => ({
         url: 'discover/movie',

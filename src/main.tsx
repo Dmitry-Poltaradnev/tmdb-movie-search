@@ -4,8 +4,8 @@ import './index.css'
 import { Provider } from 'react-redux'
 import { store } from './app/store.ts'
 import { BrowserRouter } from 'react-router-dom'
-import { AppRoutes } from './routes/routes.tsx'
-import './app/styles/reset.css'
+import { AppRoutes } from '@/common/routing/Routing.tsx'
+import '@/styles/reset.css'
 
 const params = new URLSearchParams(window.location.search)
 const redirect = params.get('redirect')

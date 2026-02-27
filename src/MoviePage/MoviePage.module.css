@@ -1,0 +1,118 @@
+.moviePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actorsList {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.similarMoviesWrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.moviePoster {
+  border-radius: 10px;
+  height: 280px;
+  object-fit: cover;
+}
+
+.movieInfoWrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.movieInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.movieTitle {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.desc {
+  display: flex;
+  justify-content: space-between;
+  max-width: 560px;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.desc p {
+  font-size: 18px;
+  font-weight: bold;
+  border-right: 2px solid #65cae1;
+  padding-right: 10px;
+}
+
+.genresList {
+  list-style: none;
+  display: flex;
+  justify-content: start;
+  gap: 10px;
+  padding: 20px 0;
+  flex-wrap: wrap;
+}
+
+.genre {
+  border: 1px solid #65cae1;
+  border-radius: 20px;
+  padding: 5px;
+  min-width: 150px;
+  text-align: center;
+}
+
+.blockTitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.actorsWrap {
+  border-bottom: 1px solid #65cae1;
+  border-top: 1px solid #65cae1;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+.secondTitle {
+  text-align: center;
+  padding: 15px 0;
+}
+
+.returnBtn {
+  margin-top: 15px;
+}
+
+@media (max-width: 1130px) {
+  .movieInfoWrap {
+    flex-direction: column;
+  }
+
+  .moviePoster {
+    width: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+  .desc p {
+    font-size: 16px;
+    border-right: none;
+    border-bottom: 2px solid #65cae1;
+    max-width: 200px;
+    padding-bottom: 5px;
+  }
+
+  .desc {
+    flex-direction: column;
+  }
+}

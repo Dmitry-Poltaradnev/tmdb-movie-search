@@ -1,0 +1,21 @@
+.movieCategoryPage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.categoryList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  max-width: 500px;
+}
+
+@media (max-width: 450px) {
+  .categoryList {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

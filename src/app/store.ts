@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { api } from '../api/tmdbApi.ts'
-import { themeReducer } from '../features/slices/theme/themeSlices.ts'
-import { favoriteMoviesReducer } from '../features/slices/favorites/favoritesSlices.ts'
-import globalErrorSlice from '../features/slices/globalError/globalErrorSlice.ts'
+import { themeReducer } from '@/slices/theme/themeSlices.ts'
+import { favoriteMoviesReducer } from '@/slices/favorites/favoritesSlices.ts'
+import globalErrorSlice from '@/slices/globalError/globalErrorSlice.ts'
 
 export const store = configureStore({
   reducer: {
