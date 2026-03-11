@@ -1,6 +1,6 @@
 import s from './FavoriteMoviesPage.module.css'
 import { useSelector } from 'react-redux'
-import { MovieCard } from '../../../MovieCard/MovieCard.tsx'
+import { MovieCard } from '@/MovieCard/MovieCard.tsx'
 import type { RootState } from '@/app/store.ts'
 import type { MovieTypes } from '@/api/schema/movies.schema.ts'
 
